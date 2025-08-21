@@ -102,6 +102,9 @@
 
     # app launcher
     tofi
+
+    # apps
+    firefox
   ];
 
   # basic configuration of git, please change to your own
