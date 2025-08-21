@@ -1,5 +1,5 @@
 {
-  firefox = {
+  xdg.desktopEntries.firefox = {
     name = "Firefox";
     genericName = "Web Browser";
     exec = "firefox %U";

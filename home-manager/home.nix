@@ -106,7 +106,6 @@
     # apps
     firefox
     prismlauncher
-    zeditor
     obsidian
   ];
 
