@@ -1,7 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, ... }: {
+  imports = [
+    ./modules/default.nix
+  ]; 
 
-{
-  # TODO please change the username & home directory to your own
+
+
   home.username = "noahj";
   home.homeDirectory = "/home/noahj";
 
@@ -96,6 +99,9 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+
+    # app launcher
+    tofi
   ];
 
   # basic configuration of git, please change to your own
