@@ -1,6 +1,6 @@
 {
   imports = [
-    ./xdg-desktop-entries.nix
+    ./xdg-desktopEntries.nix
   ];
 }
 
