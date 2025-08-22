@@ -1,6 +1,7 @@
 {
   imports = [
     ./hyprland
+    ./hyprpaper
     ./misc
   ];
 }

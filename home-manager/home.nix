@@ -151,6 +151,9 @@
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
       general.import = [ pkgs.alacritty-theme.nightfox ];
+      window = {
+	opacity = 0.8;
+      };
     };
   };
 
