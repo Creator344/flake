@@ -140,7 +140,7 @@
     enable = true;
     # custom settings
     settings = {
-      env.TERM = "xterm-256color";
+      env.TERM = "tokyo_night";
       font = {
         size = 12;
 	normal = {
