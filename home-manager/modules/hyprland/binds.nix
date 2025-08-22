@@ -8,6 +8,8 @@
       "CTRL+ALT, T, exec, alacritty"
       "$mainMod, LEFT, swapwindow, l"
       "$mainMod, RIGHT, swapwindow, r"
+      "$mainMod, UP, swapwindow, u"
+      "$mainMod, DOWN, swapwindow, d"
     ];
   };
 }
