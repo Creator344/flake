@@ -95,6 +95,7 @@
     steam
     obsidian
     kdePackages.dolphin
+    pavucontrol
 
     # bar
     waybar
