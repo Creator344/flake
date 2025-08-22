@@ -143,6 +143,24 @@
       env.TERM = "xterm-256color";
       font = {
         size = 12;
+	normal = {
+	  family = "Geist Mono Nerd Font";
+	  style = "Regular";
+	};
+
+	bold = {
+	  family = "Geist Mono Nerd Font";
+	  style = "Bold";
+	};
+	
+	italic = {
+	  family = "Geist Mono Nerd Font";
+	  style = "Italic";
+	};
+	bold_italic = {
+	  family = "Geist Mono Nerd Font";
+	  style = "Bold Italic";
+	};
       };
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
