@@ -96,6 +96,8 @@
     obsidian
     kdePackages.dolphin
     pavucontrol
+    vesktop
+    zed-editor
 
     # bar
     waybar
