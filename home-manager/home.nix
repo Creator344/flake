@@ -92,6 +92,7 @@
     # apps
     firefox
     prismlauncher
+    steam
     obsidian
     kdePackages.dolphin
 
