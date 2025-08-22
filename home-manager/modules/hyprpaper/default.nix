@@ -9,7 +9,7 @@
     ];
 
     wallpaper = [
-      ", ./wallpapers/marek-piwnicki-kE1zeGSBJJk-unsplash-2colour-2.png"
+      ",./wallpapers/marek-piwnicki-kE1zeGSBJJk-unsplash-2colour-2.png"
     ];
   };
 }

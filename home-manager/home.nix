@@ -100,9 +100,10 @@
 
     nerd-fonts.geist-mono
     
+    gnome-network-displays
   ];
 
-  # basic configuration of git, please change to your own
+  # basic configuration of git
   programs.git = {
     enable = true;
     userName = "Creator34";
