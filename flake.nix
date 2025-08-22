@@ -2,26 +2,32 @@
   description = "Creator34's NixOS flake";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs = {
+      url = "github:NixOS/nixpkgs/nixos-25.05";
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, alacritty-theme, ... }: {
+  outputs = { self, ... }@inputs: {
     nixosConfigurations = {
-      duckbook = nixpkgs.lib.nixosSystem {
+      duckbook = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [ 
 	  ./devices/duckbook/configuration.nix
 
 	  ({ config, pkgs, ... }: {
-	    nixpkgs.overlays = [ alacritty-theme.overlays.default ];
+	    nixpkgs.overlays = [ inputs.alacritty-theme.overlays.default ];
 	  })
 
-          home-manager.nixosModules.home-manager
+          inputs.home-manager.nixosModules.home-manager
 	  {
 	    home-manager.useGlobalPkgs = true;
 	    home-manager.useUserPackages = true;
@@ -30,16 +36,16 @@
 	  }
         ];
       };
-      duck = nixpkgs.lib.nixosSystem {
+      duck = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [ 
 	  ./devices/duck/configuration.nix
 
 	  ({ config, pkgs, ... }: {
-            nixpkgs.overlays = [ alacritty-theme.overlays.default ];
+            nixpkgs.overlays = [ inputs.alacritty-theme.overlays.default ];
           })
 
-          home-manager.nixosModules.home-manager
+          inputs.home-manager.nixosModules.home-manager
 	  {
 	    home-manager.useGlobalPkgs = true;
 	    home-manager.useUserPackages = true;
@@ -48,7 +54,6 @@
 	  }
         ];
       };
-
     };
   };
 }
