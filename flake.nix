@@ -35,6 +35,10 @@
         modules = [ 
 	  ./devices/duck/configuration.nix
 
+	  ({ config, pkgs, ... }: {
+            nixpkgs.overlays = [ alacritty-theme.overlays.default ];
+          })
+
           home-manager.nixosModules.home-manager
 	  {
 	    home-manager.useGlobalPkgs = true;
