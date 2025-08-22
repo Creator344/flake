@@ -107,6 +107,13 @@
     firefox
     prismlauncher
     obsidian
+    kdePackages.dolphin
+
+    # bar
+    waybar
+
+    nerd-fonts.geist-mono
+    
   ];
 
   # basic configuration of git, please change to your own
