@@ -1,4 +1,4 @@
-{ config, pkgs, alacritty-theme, ... }: {
+{ config, pkgs, stylix, ... }@inputs: {
   imports = [
     ./modules/default.nix
   ]; 
@@ -131,33 +131,8 @@
     enable = true;
     # custom settings
     settings = {
-      font = {
-        size = 12;
-	normal = {
-	  family = "Geist Mono Nerd Font";
-	  style = "Regular";
-	};
-
-	bold = {
-	  family = "Geist Mono Nerd Font";
-	  style = "Bold";
-	};
-	
-	italic = {
-	  family = "Geist Mono Nerd Font";
-	  style = "Italic";
-	};
-	
-        bold_italic = {
-	  family = "Geist Mono Nerd Font";
-	  style = "Bold Italic";
-	};
-      };
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
-      window = {
-	opacity = 0.8;
-      };
     };
   };
 
