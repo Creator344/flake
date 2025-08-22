@@ -7,14 +7,19 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
   };
 
-  outputs = { nixpkgs, home-manager, ... }: {
+  outputs = { nixpkgs, home-manager, alacritty-theme, ... }: {
     nixosConfigurations = {
       duckbook = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [ 
 	  ./devices/duckbook/configuration.nix
+
+	  ({ config, pkgs, ... }: {
+	    nixpkgs.overlays = [ alacritty-theme.overlays.default ];
+	  })
 
           home-manager.nixosModules.home-manager
 	  {

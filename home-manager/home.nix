@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, alacritty-theme, ... }: {
   imports = [
     ./modules/default.nix
   ]; 
@@ -8,21 +8,7 @@
   home.username = "noahj";
   home.homeDirectory = "/home/noahj";
 
-  # link the configuration file in current directory to the specified location in home directory
-  # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
-
-  # link all files in `./scripts` to `~/.config/i3/scripts`
-  # home.file.".config/i3/scripts" = {
-  #   source = ./scripts;
-  #   recursive = true;   # link recursively
-  #   executable = true;  # make all files executable
-  # };
-
-  # encode the file content in nix configuration file directly
-  # home.file.".xxx".text = ''
-  #     xxx
-  # '';
-
+ 
   # set cursor size and dpi for 4k monitor
   xresources.properties = {
     "Xcursor.size" = 16;
@@ -140,7 +126,6 @@
     enable = true;
     # custom settings
     settings = {
-      env.TERM = "tokyo_night";
       font = {
         size = 12;
 	normal = {
@@ -157,13 +142,15 @@
 	  family = "Geist Mono Nerd Font";
 	  style = "Italic";
 	};
-	bold_italic = {
+	
+        bold_italic = {
 	  family = "Geist Mono Nerd Font";
 	  style = "Bold Italic";
 	};
       };
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
+      general.import = [ pkgs.alacritty-theme.nightfox ];
     };
   };
 
