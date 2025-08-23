@@ -1,4 +1,4 @@
-{ config, pkgs, stylix, ... }@inputs: {
+{ config, pkgs, stylix, rose-pine-hyprcursor, ... }@inputs: {
   imports = [
     ./modules/default.nix
   ]; 
@@ -7,11 +7,6 @@
 
   home.username = "noahj";
   home.homeDirectory = "/home/noahj";
-
-  # cursor stuff
-  environment.systemPackages = [
-    inputs.rose-pine-hyprcursor.packages.${pkgs.system}.default
-  ];
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
