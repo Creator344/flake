@@ -3,4 +3,3 @@
     ./xdg-desktopEntries.nix
   ];
 }
-
