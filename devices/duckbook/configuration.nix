@@ -104,5 +104,25 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
+  
+  services.xserver.videoDrivers = [ "modesetting" "intel" ];
+
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true;
+
+    extraPackages = with pkgs; [
+      mesa
+      intel-media-driver
+      vulkan-loader
+      vulkan-validation-layers
+      vulkan-tools
+    ];
+
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      mesa
+      vulkan-loader
+    ];
+  };
 
 }
