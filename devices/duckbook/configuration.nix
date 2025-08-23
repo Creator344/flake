@@ -12,9 +12,13 @@
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = false;
-  boot.loader.efi.efiSysMountPoint = "/boot";
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi = {
+      canTouchEfiVariables = false;
+      efiSysMountPoint = "/boot";
+    };
+  };
 
   networking.hostName = "duckbook"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -44,10 +48,13 @@
     LC_TIME = "en_NZ.UTF-8";
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "nz";
-    variant = "";
+  services.xserver = {
+    # Configure keymap in X11
+    xkb = {
+      layout = "nz";
+      variant = "";
+    };
+    videoDrivers = ["modesetting" "intel"];
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -105,8 +112,6 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
-
-  services.xserver.videoDrivers = ["modesetting" "intel"];
 
   hardware.opengl = {
     enable = true;

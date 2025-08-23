@@ -3,8 +3,10 @@
     ./modules/default.nix
   ];
 
-  home.username = "noahj";
-  home.homeDirectory = "/home/noahj";
+  home = {
+    username = "noahj";
+    homeDirectory = "/home/noahj";
+  };
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
