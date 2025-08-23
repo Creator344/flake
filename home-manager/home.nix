@@ -107,7 +107,7 @@
     gnome-network-displays
 
     # cursor stuff
-    nwg-look
+    hyprcursor
   ];
 
   # basic configuration of git
