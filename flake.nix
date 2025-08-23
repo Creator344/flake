@@ -9,10 +9,7 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    stylix = {
-      url = "github:nix-community/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
   };
 
   outputs = { self, ... }@inputs: {
@@ -20,6 +17,13 @@
       duckbook = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [ 
+
+	  ({ config, pkgs, ... }: {
+
+	    nixpkgs.overlays = [ inputs.alacritty-theme.overlays.default ];
+	  
+	  })
+
 	  ./devices/duckbook/configuration.nix
 
           inputs.home-manager.nixosModules.home-manager
@@ -35,6 +39,12 @@
         system = "x86_64-linux";
         modules = [ 
 	  ./devices/duck/configuration.nix
+
+	  ({ config, pkgs, ... }: {
+
+            nixpkgs.overlays = [ inputs.alacritty-theme.overlays.default ];
+
+          })
 
           inputs.home-manager.nixosModules.home-manager
 	  {

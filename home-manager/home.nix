@@ -105,6 +105,9 @@
     nerd-fonts.geist-mono
     
     gnome-network-displays
+
+    # cursor stuff
+    nwg-look
   ];
 
   # basic configuration of git
@@ -133,6 +136,7 @@
     settings = {
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
+      general.import = [ pkgs.alacritty-theme.nightfox ];
     };
   };
 
