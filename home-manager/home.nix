@@ -100,6 +100,15 @@
 
     # nix stuff
     nixd
+
+    # love2d
+    love
+    lovely-injector
+
+    # screenshot stuff
+    grim
+    swappy
+    slurp
   ];
 
   # basic configuration of git
