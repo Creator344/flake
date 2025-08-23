@@ -13,50 +13,53 @@
     rose-pine-hyprcursor = {
       url = "github:ndom91/rose-pine-hyprcursor";
       inputs.nixpkgs.follows = "nixpkgs";
-    };  
+    };
   };
 
-  outputs = { self, ... }@inputs: {
+  outputs = {self, ...} @ inputs: {
     nixosConfigurations = {
       duckbook = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ 
+        modules = [
+          ({
+            config,
+            pkgs,
+            ...
+          }: {
+            nixpkgs.overlays = [inputs.alacritty-theme.overlays.default];
+          })
 
-	  ({ config, pkgs, ... }: {
-
-	    nixpkgs.overlays = [ inputs.alacritty-theme.overlays.default ];
-	  
-	  })
-
-	  ./devices/duckbook/configuration.nix
+          ./devices/duckbook/configuration.nix
 
           inputs.home-manager.nixosModules.home-manager
-	  {
-	    home-manager.useGlobalPkgs = true;
-	    home-manager.useUserPackages = true;
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
 
-	    home-manager.users.noahj = import ./home-manager/home.nix;
-	  }
+            home-manager.users.noahj = import ./home-manager/home.nix;
+          }
         ];
       };
       duck = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [ 
-	  ./devices/duck/configuration.nix
+        modules = [
+          ./devices/duck/configuration.nix
 
-	  ({ config, pkgs, ... }: {
-
-            nixpkgs.overlays = [ inputs.alacritty-theme.overlays.default ];
-
+          ({
+            config,
+            pkgs,
+            ...
+          }: {
+            nixpkgs.overlays = [inputs.alacritty-theme.overlays.default];
           })
 
           inputs.home-manager.nixosModules.home-manager
-	  {
-	    home-manager.useGlobalPkgs = true;
-	    home-manager.useUserPackages = true;
-	
-	    home-manager.users.noahj = import ./home-manager/home.nix;
-	  }
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.noahj = import ./home-manager/home.nix;
+          }
         ];
       };
     };
