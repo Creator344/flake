@@ -1,6 +1,0 @@
-{
-  imports = [
-    ./xdg-desktopEntries.nix
-  ];
-}
-
