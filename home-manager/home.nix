@@ -1,4 +1,4 @@
-{ config, pkgs, stylix, rose-pine-hyprcursor, ... }@inputs: {
+{ config, pkgs, stylix, rose-pine-hyprcursor, ... }: {
   imports = [
     ./modules/default.nix
   ]; 
@@ -98,9 +98,6 @@
     nerd-fonts.geist-mono
     
     gnome-network-displays
-
-    # cursor stuff
-    hyprcursor
   ];
 
   # basic configuration of git
