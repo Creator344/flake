@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{
   wayland.windowManager.hyprland.settings = {
     bind = [
       "$mainMod, Space, exec, $menu"

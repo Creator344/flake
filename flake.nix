@@ -21,11 +21,7 @@
       duckbook = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ({
-            config,
-            pkgs,
-            ...
-          }: {
+          (_: {
             nixpkgs.overlays = [inputs.alacritty-theme.overlays.default];
           })
 
@@ -33,10 +29,11 @@
 
           inputs.home-manager.nixosModules.home-manager
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            home-manager.users.noahj = import ./home-manager/home.nix;
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.noahj = import ./home-manager/home.nix;
+            };
           }
         ];
       };
@@ -45,20 +42,17 @@
         modules = [
           ./devices/duck/configuration.nix
 
-          ({
-            config,
-            pkgs,
-            ...
-          }: {
+          (_: {
             nixpkgs.overlays = [inputs.alacritty-theme.overlays.default];
           })
 
           inputs.home-manager.nixosModules.home-manager
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            home-manager.users.noahj = import ./home-manager/home.nix;
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.noahj = import ./home-manager/home.nix;
+            };
           }
         ];
       };

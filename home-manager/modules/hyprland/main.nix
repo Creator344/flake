@@ -17,9 +17,11 @@
         "waybar"
       ];
 
-      environment.sessionVariables.NIXOS_OZONE_WL = "1";
-      environment.sessionVariables.LIBVA_DRIVER_NAME = "nvidia";
-      environment.sessionVariables.__GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      environment.sessionVariables = {
+        NIXOS_OZONE_WL = "1";
+        LIBVA_DRIVER_NAME = "nvidia";
+        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+      };
 
       general = {
         gaps_in = 5;
