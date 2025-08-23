@@ -109,6 +109,8 @@
     grim
     swappy
     slurp
+
+    clipboard-jh # clipboard
   ];
 
   # basic configuration of git
