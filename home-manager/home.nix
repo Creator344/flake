@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  stylix,
-  rose-pine-hyprcursor,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./modules/default.nix
   ];

@@ -21,11 +21,7 @@
       duckbook = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ({
-            config,
-            pkgs,
-            ...
-          }: {
+          ({...}: {
             nixpkgs.overlays = [inputs.alacritty-theme.overlays.default];
           })
 
@@ -45,11 +41,7 @@
         modules = [
           ./devices/duck/configuration.nix
 
-          ({
-            config,
-            pkgs,
-            ...
-          }: {
+          ({...}: {
             nixpkgs.overlays = [inputs.alacritty-theme.overlays.default];
           })
 
