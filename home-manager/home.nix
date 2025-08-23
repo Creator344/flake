@@ -111,6 +111,8 @@
     slurp
 
     clipboard-jh # clipboard
+
+    libreoffice
   ];
 
   # basic configuration of git
