@@ -96,12 +96,14 @@
     vesktop
     zed-editor
 
-    # bar
     waybar
 
     nerd-fonts.geist-mono
 
     gnome-network-displays
+
+    # nix stuff
+    nixd
   ];
 
   # basic configuration of git

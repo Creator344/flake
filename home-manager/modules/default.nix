@@ -1,7 +1,6 @@
 {
   imports = [
     ./hyprland
-    ./misc
     ./mouseCursor
   ];
 }
