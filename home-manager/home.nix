@@ -110,8 +110,6 @@
     swappy
     slurp
 
-    clipboard-jh # clipboard
-
     libreoffice
   ];
 
