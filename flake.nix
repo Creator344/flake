@@ -3,6 +3,9 @@
 
   inputs = {
     nixpkgs = {
+      url = "github:NixOS/nixpkgs/nixos-25.05";
+    };
+    nixpkgs-unstable = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
     home-manager = {
@@ -12,10 +15,11 @@
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
   };
 
-  outputs = {...} @ inputs: {
+  outputs = {...}@inputs: {
     nixosConfigurations = {
       duckbook = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
         modules = [
           (_: {
             nixpkgs.overlays = [inputs.alacritty-theme.overlays.default];
