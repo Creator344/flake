@@ -84,6 +84,7 @@
     slurp
 
     libreoffice
+    hyprpaper
   ];
 
   # basic configuration of git
