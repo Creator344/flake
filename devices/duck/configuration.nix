@@ -65,10 +65,14 @@
 
   # Enable Hyprland
   programs.hyprland.enable = true;
+  programs.hyprlock.enable = true;
 
   environment.systemPackages = with pkgs; [
+    wget
     git
     alacritty
+    mako
+    tofi
   ];
 
   # Enable Flakes
@@ -100,4 +104,21 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
+
+  hardware.graphics = {
+    enable = true;
+
+    extraPackages = with pkgs; [
+      mesa
+      intel-media-driver
+      vulkan-loader
+      vulkan-validation-layers
+      vulkan-tools
+    ];
+
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      mesa
+      vulkan-loader
+    ];
+  };
 }
