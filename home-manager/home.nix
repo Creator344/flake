@@ -65,6 +65,8 @@
 
     waybar
 
+    tailscale
+
     nerd-fonts.geist-mono
 
     gnome-network-displays
