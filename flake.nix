@@ -22,7 +22,15 @@
         specialArgs = { inherit inputs; };
         modules = [
           (_: {
-            nixpkgs.overlays = [inputs.alacritty-theme.overlays.default];
+            nixpkgs.overlays = [
+              inputs.alacritty-theme.overlays.default
+              (final: prev: {
+                unstable = import inputs.nixpkgs-unstable {
+                  system = "x86_64-linux";
+                  config.allowUnfree = true;
+                };
+              })
+            ];
           })
 
           ./devices/duckbook/configuration.nix

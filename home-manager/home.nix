@@ -61,6 +61,7 @@
     kdePackages.dolphin
     pavucontrol
     vesktop
+    unstable.zed-editor
 
     waybar
 
@@ -81,9 +82,7 @@
     slurp
 
     libreoffice
-  ] ++ (with inputs.nixpkgs-unstable; [
-    zed-editor
-  ]);
+  ];
 
   # basic configuration of git
   programs.git = {
