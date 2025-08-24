@@ -15,8 +15,14 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "duck"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  fileSystems."/drives/2TB" = {
+    device = "/dev/disk/by-label/2TB";
+    fsType = "ntfs";
+    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "uid=noahj" "gid=users" "umask=002" ];
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
