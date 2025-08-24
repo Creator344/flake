@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-25.05";
+      url = "github:NixOS/nixpkgs/nixos-unstable";
     };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -12,7 +12,7 @@
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
   };
 
-  outputs = {self, ...} @ inputs: {
+  outputs = {...} @ inputs: {
     nixosConfigurations = {
       duckbook = inputs.nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
