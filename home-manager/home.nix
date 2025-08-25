@@ -84,6 +84,8 @@
     hyprpicker
 
     upower
+
+    bun
     prettierd
     nixfmt-rfc-style
     nixfmt-tree
