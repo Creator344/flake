@@ -1,4 +1,6 @@
-@import "../../.nixconfig/colors/digital_lavender.css";
+* {
+    font-family: "";
+}
 
 window#waybar {
     background: transparent;
@@ -10,24 +12,25 @@ window#waybar {
 }
 
 #workspaces button {
-    color: @foreground;
+    color: white;
     border-radius: 20px;
 }
 
 #workspaces button:hover {
-    color: @accent_deep;
-    background-color: @dark_light;
+    color: black;
+    background-color: white;
 }
 
 #workspaces button.active {
-    color: @accent_deep;
+    color: lightskyblue;
 }
 
-.module, #privacy {
-    background-color: @dark;
-    border: 1px solid @accent;
+.module,
+#privacy {
+    background-color: midnightblue;
+    border: 1px solid black;
     border-radius: 20px;
-    color: @foreground;
+    color: white;
     margin-left: 5px;
     margin-right: 5px;
     padding-left: 12px;

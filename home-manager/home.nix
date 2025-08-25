@@ -32,21 +32,10 @@
     # with more details log output
     nix-output-monitor
 
-    glow # markdown previewer in terminal
-
     btop # replacement of htop/nmon
-    iotop # io monitoring
-    iftop # network monitoring
 
-    # system call monitoring
-    strace # system call monitoring
-    ltrace # library call monitoring
     lsof # list open files
 
-    # system tools
-    sysstat
-    lm_sensors # for `sensors` command
-    ethtool
     pciutils # lspci
     usbutils # lsusb
 
@@ -62,10 +51,13 @@
     pavucontrol
     vesktop
     unstable.zed-editor
+    gimp
 
     waybar
 
     tailscale
+
+    oh-my-posh
 
     nerd-fonts.geist-mono
 
@@ -73,6 +65,7 @@
 
     # nix stuff
     nixd
+    nil
 
     # love2d
     love
@@ -85,6 +78,8 @@
 
     libreoffice
     hyprpaper
+    teams-for-linux
+    cloudflare-warp
   ];
 
   # basic configuration of git
@@ -114,6 +109,7 @@
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
       general.import = [pkgs.alacritty-theme.nightfox];
+      window.opacity = 0.8;
     };
   };
 
