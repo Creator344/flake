@@ -7,9 +7,9 @@
         systemd.enable = true;
         settings = {
             main = {
-                modules-right = ["privacy" "clock"];
-                modules-center = ["cava"];
-                modules-left = [ "hyprland/workspaces" "hyprland/window" "custom/gpu-usage" "memory" "cpu" "disk" ];
+                modules-right = ["privacy" "battery" "clock"];
+                modules-center = ["hyprland/window"];
+                modules-left = [ "hyprland/workspaces" "custom/gpu-usage" "memory" "cpu" "disk" ];
                 output = ["DP-3" "eDP-1"];
                 height = 36;
                 margin = "5 5 0";
@@ -20,8 +20,7 @@
                         "" = "󱄅";
                         "(.*) — Mozilla Firefox" = "󰈹  $1";
                         "(.*) - Zed" = " $1";
-                        "(.*) - Discord" = "  $1";
-                        "Discord Updater" = "  Updating...";
+                        "^Discord \\| (.*)$" = "  $1";
                         "Spotify Premium" = "󰓇 Spotify";
                     };
                 };
@@ -49,6 +48,17 @@
                 };
                 "disk" = {
                     format = "󰋊  {percentage_used}%";
+                };
+                "battery" = {
+                  format = "{capacity}% {icon}";
+                  format-alt = "{time} {icon}";
+                  format-charging = "{capacity}% ";
+                  format-icons = [ "" "" "" "" "" ];
+                  format-plugged = "{capacity}% ";
+                  states = {
+                    critical = 15;
+                    warning = 30;
+                  };
                 };
             };
         };
