@@ -15,63 +15,65 @@
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
   };
 
-  outputs = {...}@inputs: {
-    nixosConfigurations = {
-      duckbook = inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = { inherit inputs; };
-        modules = [
-          (_: {
-            nixpkgs.overlays = [
-              inputs.alacritty-theme.overlays.default
-              (final: prev: {
-                unstable = import inputs.nixpkgs-unstable {
-                  system = "x86_64-linux";
-                  config.allowUnfree = true;
-                };
-              })
-            ];
-          })
+  outputs =
+    { ... }@inputs:
+    {
+      nixosConfigurations = {
+        duckbook = inputs.nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
+          modules = [
+            (_: {
+              nixpkgs.overlays = [
+                inputs.alacritty-theme.overlays.default
+                (final: prev: {
+                  unstable = import inputs.nixpkgs-unstable {
+                    system = "x86_64-linux";
+                    config.allowUnfree = true;
+                  };
+                })
+              ];
+            })
 
-          ./devices/duckbook/configuration.nix
+            ./devices/duckbook/configuration.nix
 
-          inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.noahj = import ./home-manager/home.nix;
-            };
-          }
-        ];
-      };
-      duck = inputs.nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./devices/duck/configuration.nix
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.noahj = import ./home-manager/home.nix;
+              };
+            }
+          ];
+        };
+        duck = inputs.nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./devices/duck/configuration.nix
 
-          (_: {
-            nixpkgs.overlays = [
-	      inputs.alacritty-theme.overlays.default
-	      (final: prev: {
-                unstable = import inputs.nixpkgs-unstable {
-                  system = "x86_64-linux";
-                  config.allowUnfree = true;
-                };
-              })
-	    ];
-          })
+            (_: {
+              nixpkgs.overlays = [
+                inputs.alacritty-theme.overlays.default
+                (final: prev: {
+                  unstable = import inputs.nixpkgs-unstable {
+                    system = "x86_64-linux";
+                    config.allowUnfree = true;
+                  };
+                })
+              ];
+            })
 
-          inputs.home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.noahj = import ./home-manager/home.nix;
-            };
-          }
-        ];
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.noahj = import ./home-manager/home.nix;
+              };
+            }
+          ];
+        };
       };
     };
-  };
 }

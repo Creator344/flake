@@ -5,7 +5,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -21,7 +22,15 @@
   fileSystems."/drives/2TB" = {
     device = "/dev/disk/by-label/2TB";
     fsType = "ntfs";
-    options = [ "nosuid" "nodev" "nofail" "x-gvfs-show" "uid=noahj" "gid=users" "umask=002" ];
+    options = [
+      "nosuid"
+      "nodev"
+      "nofail"
+      "x-gvfs-show"
+      "uid=noahj"
+      "gid=users"
+      "umask=002"
+    ];
   };
 
   # Configure network proxy if necessary
@@ -59,8 +68,11 @@
   users.users.noahj = {
     isNormalUser = true;
     description = "Noah Johnson";
-    extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -82,7 +94,10 @@
   ];
 
   # Enable Flakes
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

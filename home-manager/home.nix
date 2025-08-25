@@ -1,4 +1,5 @@
-{inputs, pkgs, ...}: {
+{ inputs, pkgs, ... }:
+{
   imports = [
     ./modules/default.nix
   ];
@@ -81,6 +82,11 @@
     teams-for-linux
     cloudflare-warp
     hyprpicker
+
+    upower
+    prettierd
+    nixfmt-rfc-style
+    nixfmt-tree
   ];
 
   # basic configuration of git
@@ -109,7 +115,7 @@
     settings = {
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
-      general.import = [pkgs.alacritty-theme.nightfox];
+      general.import = [ pkgs.alacritty-theme.nightfox ];
       window.opacity = 0.8;
     };
   };

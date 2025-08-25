@@ -5,7 +5,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -54,15 +55,21 @@
       layout = "nz";
       variant = "";
     };
-    videoDrivers = ["modesetting" "intel"];
+    videoDrivers = [
+      "modesetting"
+      "intel"
+    ];
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.noahj = {
     isNormalUser = true;
     description = "Noah Johnson";
-    extraGroups = ["networkmanager" "wheel"];
-    packages = with pkgs; [];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -72,7 +79,10 @@
   programs.hyprland.enable = true;
   programs.hyprlock.enable = true;
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
