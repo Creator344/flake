@@ -12,7 +12,7 @@
       "$mainMod, DOWN, swapwindow, d"
       "$mainMod+SHIFT, S, exec, grim -g '$(slurp)' - | swappy -f -"
       "$mainMod, E, exec, dolphin"
-      "$mainMod+SHIFT, C, exec, hyprpicker"
+      "$mainMod+SHIFT, C, exec, hyprpicker -a"
 
       "$mainMod, 1, exec, hyprctl dispatch workspace 1"
       "$mainMod, 2, exec, hyprctl dispatch workspace 2"
