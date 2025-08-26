@@ -89,6 +89,8 @@
     prettierd
     nixfmt-rfc-style
     nixfmt-tree
+
+    wl-clipboard
   ];
 
   # basic configuration of git
