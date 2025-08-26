@@ -24,6 +24,17 @@
       "$mainMod, 8, exec, hyprctl dispatch workspace 8"
       "$mainMod, 9, exec, hyprctl dispatch workspace 9"
       "$mainMod, 0, exec, hyprctl dispatch workspace 10"
+
+      "$mainMod+SHIFT, 1, movetoworkspace, 1"
+      "$mainMod+SHIFT, 2, movetoworkspace, 2"
+      "$mainMod+SHIFT, 3, movetoworkspace, 3"
+      "$mainMod+SHIFT, 4, movetoworkspace, 4"
+      "$mainMod+SHIFT, 5, movetoworkspace, 5"
+      "$mainMod+SHIFT, 6, movetoworkspace, 6"
+      "$mainMod+SHIFT, 7, movetoworkspace, 7"
+      "$mainMod+SHIFT, 8, movetoworkspace, 8"
+      "$mainMod+SHIFT, 9, movetoworkspace, 9"
+      "$mainMod+SHIFT, 0, movetoworkspace, 10"
     ];
   };
 }
