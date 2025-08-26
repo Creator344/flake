@@ -116,7 +116,7 @@
     enable = true;
     enableCompletion = true;
     bashrcExtra = ''
-      eval "$(oh-my-posh init bash --config 'json'"
+      eval "$(oh-my-posh init bash --config 'json')"
     '';
 
     # set some aliases, feel free to add more or remove some
