@@ -58,8 +58,6 @@
 
     tailscale
 
-    oh-my-posh
-
     nerd-fonts.geist-mono
 
     gnome-network-displays
