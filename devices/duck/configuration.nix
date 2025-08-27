@@ -3,6 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   config,
+  lib,
   pkgs,
   ...
 }:
@@ -131,7 +132,6 @@
 
     extraPackages = with pkgs; [
       mesa
-      intel-media-driver
       vulkan-loader
       vulkan-validation-layers
       vulkan-tools
@@ -142,4 +142,15 @@
       vulkan-loader
     ];
   };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = true;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  }
 }

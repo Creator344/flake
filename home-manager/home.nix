@@ -93,6 +93,10 @@
     wl-clipboard
   ];
 
+  programs.starship = {
+    enable = true;
+  };
+
   # basic configuration of git
   programs.git = {
     enable = true;
