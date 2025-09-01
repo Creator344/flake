@@ -61,6 +61,22 @@
     ];
   };
 
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  hardware.bluetooth.enable = true;
+
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
+    ];
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.noahj = {
     isNormalUser = true;

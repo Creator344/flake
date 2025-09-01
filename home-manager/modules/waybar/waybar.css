@@ -32,3 +32,8 @@ window#waybar {
     padding-left: 12px;
     padding-right: 12px;
 }
+
+#taskbar {
+    background-color: #d9c4b8;
+    border: 0;
+}
