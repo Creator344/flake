@@ -34,6 +34,6 @@ window#waybar {
 }
 
 #taskbar {
-    background-color: #d9c4b8;
+    background-color: transparent;
     border: 0;
 }

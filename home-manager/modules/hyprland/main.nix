@@ -1,7 +1,7 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
-    systemd.enable = true;
+    systemd.enable = false;
     xwayland.enable = true;
     settings = {
       monitor = ",preferred,auto,1";
@@ -15,6 +15,7 @@
         "hyprpaper"
         "firefox"
         "waybar"
+        "clipse -listen"
       ];
 
       environment.sessionVariables = {
@@ -52,6 +53,10 @@
           passes = 1;
 
           vibrancy = 0.1696;
+        };
+        blur = {
+          passes = 3;
+          size = 2;
         };
       };
 
@@ -114,6 +119,11 @@
       windowrule = [
         "suppressevent maximise, class:.*"
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
+      ];
+
+      windowrulev2 = [
+        "float,class:(clipse)"
+        "size 622 652,class:(clipse)"
       ];
 
       debug.suppress_errors = true;
