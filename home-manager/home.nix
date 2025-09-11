@@ -2,6 +2,7 @@
 {
   imports = [
     ./modules/default.nix
+    inputs.spicetify-nix.homeManagerModules.default
   ];
 
   home = {
@@ -45,8 +46,6 @@
 
     # apps
     firefox
-    prismlauncher
-    steam
     obsidian
     kdePackages.dolphin
     pavucontrol
@@ -54,9 +53,12 @@
     unstable.zed-editor
     gimp
 
-    waybar
+    # games
+    steam
+    prismlauncher
+    mindustry-wayland
 
-    tailscale
+    waybar
 
     nerd-fonts.geist-mono
 
@@ -71,9 +73,8 @@
     lovely-injector
 
     # screenshot stuff
-    grim
-    swappy
-    slurp
+    grimblast
+    satty
 
     libreoffice
     hyprpaper
@@ -95,11 +96,28 @@
     nixfmt-rfc-style
     nixfmt-tree
 
-    wl-clipboard
+    fastfetch
+    clipse
+
+    python3
   ];
 
   programs.starship = {
     enable = true;
+  };
+
+  programs.spicetify = let
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
+  in
+  {
+    enable = true;
+    enabledExtensions = with spicePkgs.extensions; [
+      adblockify
+      hidePodcasts
+      shuffle
+    ];
+    theme = spicePkgs.themes.sleek;
+    colorScheme = "Deeper";
   };
 
   # basic configuration of git

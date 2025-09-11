@@ -113,9 +113,24 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
+
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      cups-filters
+      cups-browsed
+    ];
+  };
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 22 80 49160 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
@@ -129,6 +144,7 @@
 
   hardware.graphics = {
     enable = true;
+    enable32Bit = true;
 
     extraPackages = with pkgs; [
       mesa
@@ -141,6 +157,16 @@
       mesa
       vulkan-loader
     ];
+  };
+
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "both";
+  };
+
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];

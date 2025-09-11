@@ -10,9 +10,12 @@
       "$mainMod, RIGHT, swapwindow, r"
       "$mainMod, UP, swapwindow, u"
       "$mainMod, DOWN, swapwindow, d"
-      "$mainMod+SHIFT, S, exec, grim -g '$(slurp)' - | swappy -f -"
+      "$mainMod+SHIFT, S, exec, grimblast copy area"
+      "$mainMod, Print, exec, grimblast copy output"
       "$mainMod, E, exec, dolphin"
       "$mainMod+SHIFT, C, exec, hyprpicker -a"
+      "$mainMod, F, togglefloating,"
+      "SUPER, V, exec, alacritty --class clipse -e 'clipse'"
 
       "$mainMod, 1, exec, hyprctl dispatch workspace 1"
       "$mainMod, 2, exec, hyprctl dispatch workspace 2"
@@ -35,6 +38,12 @@
       "$mainMod+SHIFT, 8, movetoworkspace, 8"
       "$mainMod+SHIFT, 9, movetoworkspace, 9"
       "$mainMod+SHIFT, 0, movetoworkspace, 10"
+    ];
+    binds = {
+      drag_threshold = 10;
+    };
+    bindm = [
+      "$mainMod, mouse:272, movewindow"
     ];
   };
 }

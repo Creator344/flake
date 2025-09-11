@@ -13,6 +13,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
   outputs =
@@ -21,7 +22,6 @@
       nixosConfigurations = {
         duckbook = inputs.nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
           modules = [
             (_: {
               nixpkgs.overlays = [
@@ -42,6 +42,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
+                extraSpecialArgs = { inherit inputs; };
                 users.noahj = import ./home-manager/home.nix;
               };
             }
@@ -69,6 +70,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
+                extraSpecialArgs = { inherit inputs; };
                 users.noahj = import ./home-manager/home.nix;
               };
             }
