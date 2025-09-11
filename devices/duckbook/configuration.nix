@@ -113,6 +113,7 @@
     tofi
     firefox
     git
+    sddm
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -127,6 +128,11 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
