@@ -31,6 +31,9 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  services.tailscale.enable = true;
+  services.tailscale.useRoutingFeatures = "client";
+
   # Set your time zone.
   time.timeZone = "Pacific/Auckland";
 
