@@ -27,6 +27,9 @@
     gawk
     zstd
     gnupg
+    nodePackages.vercel # vercel cli
+    jetbrains.datagrip
+    yaak
 
     # nix related
     #
@@ -93,6 +96,9 @@
     clipse
 
     python3
+    usbimager
+    dig
+    heroic
   ];
 
   programs.starship = {
