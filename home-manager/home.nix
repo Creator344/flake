@@ -27,6 +27,9 @@
     gawk
     zstd
     gnupg
+    nodePackages.vercel # vercel cli
+    jetbrains.datagrip
+    yaak
 
     # nix related
     #
@@ -101,6 +104,8 @@
 
     python3
     unstable.shattered-pixel-dungeon
+    usbimager
+    dig
     heroic
   ];
 

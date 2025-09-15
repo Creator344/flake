@@ -19,6 +19,7 @@
 
   networking.hostName = "duck"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
 
   fileSystems."/drives/2TB" = {
     device = "/dev/disk/by-label/2TB";
@@ -130,9 +131,29 @@
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  networking.firewall.allowedTCPPorts = [ 22 80 49160 ];
+  networking.firewall.allowedTCPPorts = [ 22 80 49160 25565 ];
+  networking.firewall.allowedUDPPorts = [ 51820 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  networking.wireguard.enable = true;
+  networking.wireguard.interfaces = {
+    woldemure = {
+      ips = [ "" ];
+      listenPort = 51820;
+
+      privateKeyFile = "/home/noahj/wireguard-keys/private";
+
+      peers = [
+        {
+          publicKey = "";
+          allowedIPs = [ "" ];
+          endpoint = "34.9.202.116:51820";
+          persistentKeepalive = 25;
+        }
+      ];
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
