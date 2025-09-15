@@ -86,8 +86,15 @@
     hyprpicker
 
     upower
+    brightnessctl
 
     bun
+    sqlite
+    rustc
+    pkg-config
+    cargo
+    gcc
+    protobuf
     prettierd
     nixfmt-rfc-style
     nixfmt-tree
@@ -142,6 +149,7 @@
     enable = true;
     enableCompletion = true;
     bashrcExtra = ''
+      export PATH="$HOME/.local/bin:$PATH"
       eval "$(starship init bash)"
     '';
 

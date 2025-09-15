@@ -31,6 +31,9 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
+  services.tailscale.enable = true;
+  services.tailscale.useRoutingFeatures = "client";
+
   # Set your time zone.
   time.timeZone = "Pacific/Auckland";
 
@@ -124,6 +127,11 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
