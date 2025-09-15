@@ -100,6 +100,8 @@
     clipse
 
     python3
+    unstable.shattered-pixel-dungeon
+    heroic
   ];
 
   programs.starship = {

@@ -33,6 +33,7 @@
 
   services.tailscale.enable = true;
   services.tailscale.useRoutingFeatures = "client";
+  services.tailscale.openFirewall = true;
 
   # Set your time zone.
   time.timeZone = "Pacific/Auckland";
@@ -113,6 +114,7 @@
     tofi
     firefox
     git
+    unstable.onedrive
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -124,6 +126,8 @@
   # };
 
   # List services that you want to enable:
+
+  services.onedrive.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
