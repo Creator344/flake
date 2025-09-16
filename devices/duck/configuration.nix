@@ -132,28 +132,9 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   networking.firewall.allowedTCPPorts = [ 22 80 49160 25565 ];
-  networking.firewall.allowedUDPPorts = [ 51820 ];
+  networking.firewall.allowedUDPPorts = [ 38274 40759 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
-  networking.wireguard.enable = true;
-  networking.wireguard.interfaces = {
-    woldemure = {
-      ips = [ "" ];
-      listenPort = 51820;
-
-      privateKeyFile = "/home/noahj/wireguard-keys/private";
-
-      peers = [
-        {
-          publicKey = "";
-          allowedIPs = [ "" ];
-          endpoint = "34.9.202.116:51820";
-          persistentKeepalive = 25;
-        }
-      ];
-    };
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

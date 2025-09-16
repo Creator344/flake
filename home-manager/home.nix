@@ -107,6 +107,7 @@
     usbimager
     dig
     heroic
+    nmap
   ];
 
   programs.starship = {
