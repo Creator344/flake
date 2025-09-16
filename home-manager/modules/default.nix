@@ -4,5 +4,6 @@
     ./hyprpaper
     ./mouseCursor
     ./waybar
+    ./tofi
   ];
 }
