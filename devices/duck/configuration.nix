@@ -19,7 +19,10 @@
 
   networking.hostName = "duck"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.nameservers = [ "1.1.1.1" "1.0.0.1" ];
+  networking.nameservers = [
+    "1.1.1.1"
+    "1.0.0.1"
+  ];
 
   fileSystems."/drives/2TB" = {
     device = "/dev/disk/by-label/2TB";
@@ -131,22 +134,36 @@
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
-  networking.firewall.allowedTCPPorts = [ 22 80 49160 25565 ];
-  networking.firewall.allowedUDPPorts = [ 38274 40759 ];
+  networking.firewall.allowedTCPPorts = [
+    22
+    80
+    49160
+    25565
+  ];
+  networking.firewall.allowedUDPPorts = [
+    38274
+    40759
+  ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
   networking.wg-quick.interfaces = {
     woldemure = {
       privateKeyFile = "/home/noahj/wireguard-keys/privatekey";
-      address = [ "10.66.67.2/32" "fd42:42:43::2/128" ];
+      address = [
+        "10.66.67.2/32"
+        "fd42:42:43::2/128"
+      ];
       mtu = 1380;
       listenPort = 38274;
       peers = [
         {
           publicKey = "yphSocz6NN8xSJCOdhFeikiiw2Dm/NreQwZnUAB9Dno=";
           endpoint = "73.44.20.131:51820";
-          allowedIPs = [ "10.66.67.2/32" "fd42:42:43::2/128,10.0.0.190/32" ];
+          allowedIPs = [
+            "10.66.67.2/32"
+            "fd42:42:43::2/128,10.0.0.190/32"
+          ];
           persistentKeepalive = 15;
         }
       ];
