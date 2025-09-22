@@ -136,6 +136,23 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
+  networking.wg-quick.interfaces = {
+    woldemure = {
+      privateKeyFile = "/home/noahj/wireguard-keys/privatekey";
+      address = [ "10.66.67.2/32" "fd42:42:43::2/128" ];
+      mtu = 1380;
+      listenPort = 38274;
+      peers = [
+        {
+          publicKey = "yphSocz6NN8xSJCOdhFeikiiw2Dm/NreQwZnUAB9Dno=";
+          endpoint = "73.44.20.131:51820";
+          allowedIPs = [ "10.66.67.2/32" "fd42:42:43::2/128,10.0.0.190/32" ];
+          persistentKeepalive = 15;
+        }
+      ];
+    };
+  };
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
