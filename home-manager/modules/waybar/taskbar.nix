@@ -3,10 +3,6 @@
     modules-center = [
       "wlr/taskbar"
     ];
-    output = [
-      "DP-3"
-      "eDP-1"
-    ];
     "wlr/taskbar" = {
       icon-size = 24;
       on-click = "activate";

@@ -4,7 +4,7 @@
     systemd.enable = false;
     xwayland.enable = true;
     settings = {
-      monitor = ["eDP-1,preferred,auto,1" "HDMI-A-1,3440x1440@60,auto,1"];
+      monitor = ["eDP-1,preferred,auto,1" "HDMI-A-1,1920x1080@60,auto,1" ];
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
       "$fileManager" = "dolphin";

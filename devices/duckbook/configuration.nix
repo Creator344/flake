@@ -21,6 +21,17 @@
     };
   };
 
+  boot = {
+    extraModulePackages = [ config.boot.kernelPackages.evdi ];
+    initrd = {
+      # List of modules that are always loaded by the initrd.
+      kernelModules = [
+        "evdi"
+      ];
+    };
+  };
+
+
   networking.hostName = "duckbook"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -61,6 +72,7 @@
     };
     videoDrivers = [
       "modesetting"
+      "displaylink"
       "intel"
     ];
   };
@@ -114,7 +126,6 @@
     tofi
     firefox
     git
-    unstable.onedrive
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -127,7 +138,6 @@
 
   # List services that you want to enable:
 
-  services.onedrive.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -142,6 +152,8 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  networking.firewall.allowedTCPPorts = [ 25565 ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

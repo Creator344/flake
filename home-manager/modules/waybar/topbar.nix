@@ -12,10 +12,6 @@
       "cpu"
       "disk"
     ];
-    output = [
-      "DP-3"
-      "eDP-1"
-    ];
     height = 36;
     margin = "5 5 0 5";
     "hyprland/window" = {
