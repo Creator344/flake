@@ -1,7 +1,7 @@
 { inputs, pkgs, ... }:
 {
   imports = [
-    ./modules/default.nix
+    ./modules
     inputs.spicetify-nix.homeManagerModules.default
   ];
 
@@ -73,6 +73,7 @@
     dig
     heroic
     nmap
+    just
   ];
 
   programs.starship = {
@@ -121,7 +122,6 @@
       eval "$(starship init bash)"
     '';
 
-    # set some aliases, feel free to add more or remove some
     shellAliases = {
       k = "kubectl";
       urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
