@@ -73,6 +73,7 @@
     dig
     heroic
     nmap
+    powertop
   ];
 
   programs.starship = {
