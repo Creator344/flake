@@ -3,7 +3,7 @@
     ./hyprland
     ./hyprpaper
     ./mouseCursor
-    ./waybar
     ./tofi
+    ./waybar
   ];
 }

@@ -1,6 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   config,
   pkgs,
@@ -8,7 +5,6 @@
 }:
 {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
@@ -21,8 +17,21 @@
     };
   };
 
+  boot = {
+    extraModulePackages = [ config.boot.kernelPackages.evdi ];
+    initrd = {
+      # List of modules that are always loaded by the initrd.
+      kernelModules = [
+        "evdi"
+      ];
+    };
+  };
+
   networking.hostName = "duckbook"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.nameservers = [
+    "1.1.1.1"
+    "1.0.0.1"
+  ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -61,6 +70,7 @@
     };
     videoDrivers = [
       "modesetting"
+      "displaylink"
       "intel"
     ];
   };
@@ -89,7 +99,6 @@
       "networkmanager"
       "wheel"
     ];
-    packages = with pkgs; [ ];
   };
 
   # Allow unfree packages
@@ -114,7 +123,6 @@
     tofi
     firefox
     git
-    unstable.onedrive
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -126,8 +134,6 @@
   # };
 
   # List services that you want to enable:
-
-  services.onedrive.enable = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -142,6 +148,8 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  networking.firewall.allowedTCPPorts = [ 25565 ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
