@@ -75,6 +75,7 @@
     nmap
     powertop
     just
+    cmatrix
   ];
 
   programs.starship = {

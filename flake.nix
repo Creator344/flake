@@ -14,6 +14,7 @@
     };
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
   };
 
   outputs =
@@ -34,6 +35,8 @@
                 })
               ];
             })
+
+            inputs.nix-flatpak.nixosModules.nix-flatpak
 
             ./devices/duckbook/configuration.nix
 
