@@ -35,7 +35,7 @@
               ];
             })
 
-            ./devices/duckbook/configuration.nix
+            ./hosts/duckbook/configuration.nix
 
             inputs.home-manager.nixosModules.home-manager
             {
@@ -51,7 +51,7 @@
         duck = inputs.nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            ./devices/duck/configuration.nix
+            ./hosts/duck/configuration.nix
 
             (_: {
               nixpkgs.overlays = [
