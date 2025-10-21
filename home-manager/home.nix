@@ -79,6 +79,7 @@
     handbrake
     usbimager
     unstable.jdk25
+    cmatrix
   ];
 
   programs.starship = {
