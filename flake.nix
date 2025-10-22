@@ -24,6 +24,7 @@
         duckbook = inputs.nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            inputs.nix-flatpak.nixosModules.nix-flatpak
             (_: {
               nixpkgs.overlays = [
                 inputs.alacritty-theme.overlays.default
@@ -52,6 +53,7 @@
         duck = inputs.nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            inputs.nix-flatpak.nixosModules.nix-flatpak
             ./hosts/duck/configuration.nix
 
             (_: {
