@@ -9,7 +9,7 @@
       ];
       input-field = [
           {
-            size = "200, 50";
+            size = "400, 50";
             position = "0, -80";
             monitor = "";
             dots_center = true;
