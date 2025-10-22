@@ -108,7 +108,6 @@
 
   # Enable Hyprland and other hypr stuff
   programs.hyprland.enable = true;
-  programs.hyprlock.enable = true;
 
   nix.settings.experimental-features = [
     "nix-command"

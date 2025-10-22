@@ -76,6 +76,10 @@
     powertop
     just
     cmatrix
+    bambu-studio
+    samba
+    android-file-transfer
+    mtpfs
   ];
 
   programs.starship = {
