@@ -75,6 +75,10 @@
     nmap
     powertop
     just
+    nvidia-container-toolkit
+    handbrake
+    usbimager
+    unstable.jdk25
     cmatrix
     bambu-studio
     samba
