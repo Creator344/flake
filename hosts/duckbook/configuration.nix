@@ -124,6 +124,8 @@
     tofi
     firefox
     git
+    gparted
+    hyprpolkitagent
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -138,6 +140,8 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  services.usbmuxd.enable = true;
 
   services.displayManager.sddm = {
     enable = true;
@@ -185,5 +189,9 @@
       mesa
       vulkan-loader
     ];
+  };
+
+  virtualisation.docker = {
+    enable = true;
   };
 }

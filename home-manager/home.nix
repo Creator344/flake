@@ -84,7 +84,13 @@
     samba
     android-file-transfer
     mtpfs
+    pandoc
+    p7zip
+    cmake
+    ninja
+    dos2unix
   ];
+
 
   programs.starship = {
     enable = true;
