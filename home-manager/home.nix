@@ -11,84 +11,102 @@
   };
 
   home.packages = with pkgs; [
-    neofetch
-    zip
-    xz
-    unzip
+    # CLI Apps
+    # Development
+    bun
+    cargo
+    cmake
+    gcc
     gh
-    which
-    tree
+    unstable.jdk25
+    just
+    nil
+    ninja
+    nixd
+    nixfmt-tree
+    nixfmt-rfc-style
+    nodePackages.vercel
+    nvidia-container-toolkit
+    prettierd
+    python3
+    p7zip
+    rustc
+    sqlite
+    yaak
+    # Files
+    gawk
+    gnupg
     gnused
     gnutar
-    gawk
+    pandoc
+    samba
+    tree
+    unzip
+    which
+    xz
+    zip
     zstd
-    gnupg
-    nodePackages.vercel
-    jetbrains.datagrip
-    yaak
+    # Misc
+    cmatrix
+    # Monitoring
     btop
+    upower
+    # Networking
+    cloudflare-warp
+    dig
+    nmap
+    # System Configuration
+    brightnessctl
+    # System Info
+    fastfetch
     pciutils
+    powertop
     usbutils
-    tofi
+
+    # Desktop Apps
+    # Development
+    jetbrains.datagrip
+    unstable.zed-editor
+    # Games
+    heroic
+    love
+    mindustry-wayland
+    prismlauncher
+    steam
+    unstable.shattered-pixel-dungeon
+    # General
     firefox
-    obsidian
     kdePackages.dolphin
     pavucontrol
-    vesktop
-    unstable.zed-editor
-    gimp
-    steam
-    prismlauncher
-    mindustry-wayland
-    waybar
-    nerd-fonts.geist-mono
-    gnome-network-displays
-    nixd
-    nil
-    love
-    lovely-injector
-    grimblast
-    libreoffice
-    hyprpaper
-    teams-for-linux
-    cloudflare-warp
-    hyprpicker
-    upower
-    brightnessctl
-    bun
-    sqlite
-    rustc
-    pkg-config
-    cargo
-    gcc
-    protobuf
-    prettierd
-    nixfmt-rfc-style
-    nixfmt-tree
-    fastfetch
-    clipse
-    python3
-    unstable.shattered-pixel-dungeon
-    usbimager
-    dig
-    heroic
-    nmap
-    powertop
-    just
-    nvidia-container-toolkit
+    # Media
     handbrake
-    usbimager
-    unstable.jdk25
-    cmatrix
+    # Social
+    vesktop
+    # Work
+    libreoffice
+    obsidian
+    teams-for-linux
+    # 3D Printing
     bambu-studio
-    samba
-    android-file-transfer
-    mtpfs
-    pandoc
-    p7zip
-    cmake
-    ninja
-    dos2unix
+
+    # Fonts
+    nerd-fonts.geist-mono
+
+    # Hyprland
+    # App Launcher
+    tofi
+    # Bars
+    waybar
+    # Clipboard
+    clipse
+    # Colour Picker
+    hyprpicker
+    # Compatibility
+    gnome-network-displays
+    # Desktop Background
+    hyprpaper
+    # Screenshots
+    grimblast
   ];
 
 
