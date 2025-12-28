@@ -13,9 +13,24 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.cudaSupport = true;
 
   fileSystems."/drives/2TB" = {
     device = "/dev/disk/by-label/2TB";
+    fsType = "ntfs";
+    options = [
+      "nosuid"
+      "nodev"
+      "nofail"
+      "x-gvfs-show"
+      "uid=noahj"
+      "gid=users"
+      "umask=002"
+    ];
+  };
+
+  fileSystems."/drives/SSD_STORAGE" = {
+    device = "/dev/disk/by-label/SSD_STORAGE";
     fsType = "ntfs";
     options = [
       "nosuid"
@@ -65,6 +80,7 @@
     mako
     tofi
     lsscsi
+    cudatoolkit
   ];
 
   virtualisation.docker = {
@@ -125,6 +141,8 @@
     "nix-command"
     "flakes"
   ];
+
+  services.flatpak.enable = true;
 
   services.openssh.enable = true;
 

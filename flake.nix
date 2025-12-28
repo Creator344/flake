@@ -15,6 +15,7 @@
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
+    stylix.url = "github:nix-community/stylix/release-25.05";
   };
 
   outputs =
@@ -24,6 +25,7 @@
         duckbook = inputs.nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            inputs.stylix.nixosModules.stylix
             inputs.nix-flatpak.nixosModules.nix-flatpak
             (_: {
               nixpkgs.overlays = [
@@ -53,6 +55,7 @@
         duck = inputs.nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
+            inputs.stylix.nixosModules.stylix
             inputs.nix-flatpak.nixosModules.nix-flatpak
             ./hosts/duck/configuration.nix
 

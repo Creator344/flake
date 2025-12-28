@@ -6,7 +6,7 @@
     settings = {
       monitor = [
         "eDP-1,preferred,auto,1"
-        "HDMI-A-1,3440x1440@60,auto,1"
+        "HDMI-A-1,1920x1080@60,1920x0,1"
       ];
       "$mainMod" = "SUPER";
       "$terminal" = "alacritty";
@@ -128,6 +128,19 @@
       windowrulev2 = [
         "float,class:(clipse)"
         "size 622 652,class:(clipse)"
+      ];
+
+      workspace = [
+        "1, monitor:DP-3"
+        "2, monitor:DP-3"
+        "3, monitor:DP-3"
+        "4, monitor:DP-3"
+        "5, monitor:DP-3"
+        "6, monitor:DP-3"
+        "7, monitor:DP-3"
+        "8, monitor:DP-3"
+        "9, monitor:DP-3"
+        "10, monitor:HDMI-A-1"
       ];
 
       debug.suppress_errors = true;

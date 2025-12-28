@@ -22,7 +22,6 @@
       "1.0.0.1"
     ];
 
-
     firewall.allowPing = true;
   };
 

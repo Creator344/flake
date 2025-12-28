@@ -75,11 +75,13 @@
     steam
     unstable.shattered-pixel-dungeon
     # General
-    firefox
+    
     kdePackages.dolphin
     pavucontrol
     # Media
+    unstable.blender
     handbrake
+    kicad
     # Social
     vesktop
     # Work
@@ -108,7 +110,6 @@
     # Screenshots
     grimblast
   ];
-
 
   programs.starship = {
     enable = true;
