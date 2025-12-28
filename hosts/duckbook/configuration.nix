@@ -49,6 +49,10 @@
   # Set your time zone.
   time.timeZone = "Pacific/Auckland";
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-36.9.5"
+  ];
+
   # Select internationalisation properties.
   i18n.defaultLocale = "en_NZ.UTF-8";
 
@@ -93,7 +97,6 @@
     ];
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.noahj = {
     isNormalUser = true;
     description = "Noah Johnson";
@@ -122,7 +125,6 @@
     mako
     hyprpaper
     tofi
-    firefox
     git
     gparted
     hyprpolkitagent

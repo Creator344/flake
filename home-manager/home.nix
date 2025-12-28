@@ -1,4 +1,7 @@
 { inputs, pkgs, ... }:
+let
+  heliumBrowser = pkgs.callPackage ./modules/helium/default.nix {};
+in
 {
   imports = [
     ./modules
@@ -64,9 +67,13 @@
     usbutils
 
     # Desktop Apps
+    # 3D Modelling
+    unstable.blender
     # Development
     jetbrains.datagrip
     unstable.zed-editor
+    # Game Development
+    godot
     # Games
     heroic
     love
@@ -74,10 +81,13 @@
     prismlauncher
     steam
     unstable.shattered-pixel-dungeon
+    # Games Modding
+    r2modman
     # General
-    
+    heliumBrowser
     kdePackages.dolphin
     pavucontrol
+    qbittorrent
     # Media
     unstable.blender
     handbrake
