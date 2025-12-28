@@ -45,6 +45,10 @@
 
   time.timeZone = "Pacific/Auckland";
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-36.9.5"
+  ];
+
   i18n.defaultLocale = "en_NZ.UTF-8";
 
   i18n.extraLocaleSettings = {
