@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, lib, ... }:
 let
   heliumBrowser = pkgs.callPackage ./modules/helium/default.nix {};
 in
