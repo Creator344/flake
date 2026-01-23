@@ -23,6 +23,15 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
@@ -30,7 +39,13 @@
   };
 
   outputs =
-    { nixpkgs, nix-darwin, nixpkgs-darwin, ... }@inputs:
+    {
+      nixpkgs,
+      nix-darwin,
+      nixpkgs-darwin,
+      nix-homebrew,
+      ...
+    }@inputs:
     {
       nixosConfigurations = {
         duckbook = nixpkgs.lib.nixosSystem {
@@ -63,7 +78,7 @@
             }
           ];
         };
-        
+
         duck = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
@@ -95,13 +110,13 @@
           ];
         };
       };
-      
+
       darwinConfigurations = {
         duckbook-pro = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           modules = [
             ./hosts/duckbook-pro/configuration.nix
-            
+
             (_: {
               nixpkgs.overlays = [
                 inputs.alacritty-theme.overlays.default
@@ -113,7 +128,16 @@
                 })
               ];
             })
-            
+
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true;
+                enableRosetta = true;
+                user = "noahj";
+              };
+            }
+
             inputs.home-manager-darwin.darwinModules.home-manager
             {
               home-manager = {

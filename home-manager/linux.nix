@@ -1,6 +1,6 @@
-{ inputs, pkgs, lib, ... }:
+{ inputs, pkgs, ... }:
 let
-  heliumBrowser = pkgs.callPackage ./modules/helium/default.nix {};
+  heliumBrowser = pkgs.callPackage ./modules/helium/default.nix { };
 in
 {
   imports = [
@@ -89,7 +89,6 @@ in
     pavucontrol
     qbittorrent
     # Media
-    unstable.blender
     handbrake
     kicad
     # Social
