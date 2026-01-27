@@ -230,7 +230,7 @@
         "type": "github"
       }
     },
-    "home-manager-linux": {
+    "home-manager-nixos": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -254,11 +254,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1769134389,
-        "narHash": "sha256-5/skoEuv4FbyGIsIDkL3lz8sBpoy8zFNpAx3umKfq8E=",
+        "lastModified": 1769400956,
+        "narHash": "sha256-Kxerhy1enHS7uzRF2AKndXOfLcgilaR9JIRp7LLBugk=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "c7469e12915f974dfdbac98658bba86f61d0261f",
+        "rev": "6b8633968b09ae4afcca433a9d0caeff2e644718",
         "type": "github"
       },
       "original": {
@@ -270,11 +270,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1769134105,
-        "narHash": "sha256-MFQcHHOTcW0urKaAm12KSHNSgpuht0ej7Zz5QsCiEUE=",
+        "lastModified": 1769399334,
+        "narHash": "sha256-BmPvlj19p1BmbTMaiQyPMFDUF6gMrc8H375UT8NE2Hg=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "0bed58ed10be614d400856758ed7411c122ce527",
+        "rev": "a9a1a61d89f457f279344a8d637b9ce243fdff0c",
         "type": "github"
       },
       "original": {
@@ -356,11 +356,11 @@
     },
     "nixpkgs-darwin": {
       "locked": {
-        "lastModified": 1767962478,
-        "narHash": "sha256-7ywwapHmJ2/dtP0j1t9fV9KQc+byL9W9X9oG3aDS4qg=",
+        "lastModified": 1769248673,
+        "narHash": "sha256-oyxrDiV2yFToXpzwiJUYkxCjFHvL21tMQ2BpQMyMDTw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "35588f29848c57ea8ac86699278d2a410dab0adb",
+        "rev": "c0301d62ba146fee37e79fbc4b6323af52a2834e",
         "type": "github"
       },
       "original": {
@@ -387,11 +387,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1766651565,
-        "narHash": "sha256-QEhk0eXgyIqTpJ/ehZKg9IKS7EtlWxF3N7DXy42zPfU=",
+        "lastModified": 1769170682,
+        "narHash": "sha256-oMmN1lVQU0F0W2k6OI3bgdzp2YOHWYUAw79qzDSjenU=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "3e2499d5539c16d0d173ba53552a4ff8547f4539",
+        "rev": "c5296fdd05cfa2c187990dd909864da9658df755",
         "type": "github"
       },
       "original": {
@@ -419,11 +419,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1766070988,
-        "narHash": "sha256-G/WVghka6c4bAzMhTwT2vjLccg/awmHkdKSd2JrycLc=",
+        "lastModified": 1769018530,
+        "narHash": "sha256-MJ27Cy2NtBEV5tsK+YraYr2g851f3Fl1LpNHDzDX15c=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "c6245e83d836d0433170a16eb185cefe0572f8b8",
+        "rev": "88d3861acdd3d2f0e361767018218e51810df8a1",
         "type": "github"
       },
       "original": {
@@ -435,11 +435,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1767313136,
-        "narHash": "sha256-16KkgfdYqjaeRGBaYsNrhPRRENs0qzkQVUooNHtoy2w=",
+        "lastModified": 1751211869,
+        "narHash": "sha256-1Cu92i1KSPbhPCKxoiVG5qnoRiKTgR5CcGSRyLpOd7Y=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ac62194c3917d5f474c1a844b6fd6da2db95077d",
+        "rev": "b43c397f6c213918d6cfe6e3550abfe79b5d1c51",
         "type": "github"
       },
       "original": {
@@ -479,7 +479,7 @@
       "inputs": {
         "alacritty-theme": "alacritty-theme",
         "home-manager-darwin": "home-manager-darwin",
-        "home-manager-linux": "home-manager-linux",
+        "home-manager-nixos": "home-manager-nixos",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
         "nix-darwin": "nix-darwin",
@@ -498,11 +498,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1766292025,
-        "narHash": "sha256-dZ9SSqRXfb+WU9MLl5c/ktdRWYZ42uxBPB7rQYuDaJs=",
+        "lastModified": 1769316930,
+        "narHash": "sha256-4EOGHYLpIscwr+6drHE28Qj7NDjjowp2Vd8QkXjdBBE=",
         "owner": "Gerg-L",
         "repo": "spicetify-nix",
-        "rev": "73031a3c9359c6c0ab82098793573d0c0951e372",
+        "rev": "b2ce438f386943ef611e196a178af2d79042903b",
         "type": "github"
       },
       "original": {

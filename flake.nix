@@ -15,7 +15,7 @@
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
-    home-manager-linux = {
+    home-manager-nixos = {
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -67,13 +67,13 @@
 
             ./hosts/duckbook/configuration.nix
 
-            inputs.home-manager-linux.nixosModules.home-manager
+            inputs.home-manager-nixos.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.noahj = import ./home-manager/linux.nix;
+                users.noahj = import ./home-manager/nixos.nix;
               };
             }
           ];
@@ -98,13 +98,13 @@
               ];
             })
 
-            inputs.home-manager-linux.nixosModules.home-manager
+            inputs.home-manager-nixos.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.noahj = import ./home-manager/linux.nix;
+                users.noahj = import ./home-manager/nixos.nix;
               };
             }
           ];

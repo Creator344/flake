@@ -10,6 +10,9 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Allow broken packages
+  nixpkgs.config.allowBroken = true;
+
   # Enable alternative shell support in nix-darwin.
   # programs.fish.enable = true;
 
@@ -27,17 +30,24 @@
 
   homebrew = {
     enable = true;
-    brews = [ ];
     casks = [
+      # Containerisation
+      "docker-desktop"
       # Development
       "zed"
       # Game Development
       "godot"
       "unity-hub"
+      # Games
+      "roblox"
+      "robloxstudio"
+      "steam"
       # General
       "raycast"
       # Networking
       "cloudflare-warp"
+      # Password Manager
+      "bitwarden"
       # Web Browsing
       "helium-browser"
     ];

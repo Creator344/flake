@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ./darwin-modules
+  ];
+  
   home = {
     username = "noahj";
     homeDirectory = "/Users/noahj";
@@ -16,7 +20,6 @@
       nil
       nixd
       nixfmt-tree
-      nodePackages.vercel
       prettierd
       python3
       rustc
@@ -55,8 +58,16 @@
       # kicad
       # Social
       vesktop
+      # Virtualisation
+      colima
+      docker
+      docker-compose
+      utm
       # Work
       obsidian
+
+      # Web Apps
+      # open-webui # dependency python3 accelerate broken as of 26/01/26
 
       nerd-fonts.geist-mono
 
