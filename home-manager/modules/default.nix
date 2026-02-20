@@ -1,11 +1,7 @@
 {
   imports = [
-    ./hyprland
-    ./hyprlock
-    ./hyprpaper
-    ./mouseCursor
+    ./niri
+    ./noctalia
     ./stylix
-    ./tofi
-    ./waybar
   ];
 }

@@ -6,6 +6,7 @@ in
   imports = [
     ./modules
     inputs.spicetify-nix.homeManagerModules.default
+    inputs.niri.homeModules.niri
   ];
 
   home = {
@@ -89,17 +90,12 @@ in
     pavucontrol
     qbittorrent
     # Media
-    unstable.blender
     handbrake
     kicad
     # Social
     vesktop
     # Work
-    libreoffice
     obsidian
-    teams-for-linux
-    # 3D Printing
-    bambu-studio
 
     # Fonts
     nerd-fonts.geist-mono
@@ -120,7 +116,7 @@ in
     # Screenshots
     grimblast
   ];
-
+  
   programs.starship = {
     enable = true;
   };
@@ -143,8 +139,12 @@ in
   # basic configuration of git
   programs.git = {
     enable = true;
-    userName = "Creator34";
-    userEmail = "98237272+Creator344@users.noreply.github.com";
+    settings = {
+      user = {
+        name = "Creator34";
+        email = "98237272+Creator344@users.noreply.github.com";
+      };
+    };
   };
 
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
