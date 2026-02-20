@@ -9,7 +9,29 @@
     };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
+    nixpkgs-darwin = {
+      url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
+    };
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+    };
+    home-manager-nixos = {
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager-darwin = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
     };
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
@@ -19,10 +41,16 @@
   };
 
   outputs =
-    { ... }@inputs:
+    {
+      nixpkgs,
+      nix-darwin,
+      nixpkgs-darwin,
+      nix-homebrew,
+      ...
+    }@inputs:
     {
       nixosConfigurations = {
-        duckbook = inputs.nixpkgs.lib.nixosSystem {
+        duckbook = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             inputs.stylix.nixosModules.stylix
@@ -41,18 +69,19 @@
 
             ./hosts/duckbook/configuration.nix
 
-            inputs.home-manager.nixosModules.home-manager
+            inputs.home-manager-nixos.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.noahj = import ./home-manager/home.nix;
+                users.noahj = import ./home-manager/nixos.nix;
               };
             }
           ];
         };
-        duck = inputs.nixpkgs.lib.nixosSystem {
+
+        duck = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             inputs.stylix.nixosModules.stylix
@@ -71,13 +100,53 @@
               ];
             })
 
-            inputs.home-manager.nixosModules.home-manager
+            inputs.home-manager-nixos.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.noahj = import ./home-manager/home.nix;
+                users.noahj = import ./home-manager/nixos.nix;
+              };
+            }
+          ];
+        };
+      };
+
+      darwinConfigurations = {
+        duckbook-pro = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            ./hosts/duckbook-pro/configuration.nix
+
+            (_: {
+              nixpkgs.overlays = [
+                inputs.alacritty-theme.overlays.default
+                (final: prev: {
+                  unstable = import inputs.nixpkgs-unstable {
+                    system = "aarch64-darwin";
+                    config.allowUnfree = true;
+                  };
+                })
+              ];
+            })
+
+            nix-homebrew.darwinModules.nix-homebrew
+            {
+              nix-homebrew = {
+                enable = true;
+                enableRosetta = true;
+                user = "noahj";
+              };
+            }
+
+            inputs.home-manager-darwin.darwinModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs; };
+                users.noahj = import ./home-manager/darwin.nix;
               };
             }
           ];

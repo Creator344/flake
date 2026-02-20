@@ -1,6 +1,6 @@
 { inputs, pkgs, ... }:
 let
-  heliumBrowser = pkgs.callPackage ./modules/helium/default.nix {};
+  heliumBrowser = pkgs.callPackage ./modules/helium/default.nix { };
 in
 {
   imports = [
