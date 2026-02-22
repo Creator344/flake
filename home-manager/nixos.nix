@@ -36,7 +36,6 @@
     nodePackages.vercel
     nvidia-container-toolkit
     prettierd
-    python3
     p7zip
     rustc
     sqlite
@@ -63,6 +62,12 @@
     cloudflare-warp
     dig
     nmap
+    # Python
+    (python3.withPackages (
+      p: with p; [
+        pyqt6
+      ]
+    ))
     # System Configuration
     brightnessctl
     # System Info

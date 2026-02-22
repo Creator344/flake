@@ -35,6 +35,8 @@
             {
               id = "ControlCenter";
               useDistroLogo = true;
+              enableColorization = true;
+              colorizeSystemIcon = "primary";
             }
           ];
           center = [
@@ -105,6 +107,10 @@
           {
             enabled = true;
             id = "zed";
+          }
+          {
+            enabled = true;
+            id = "pywalfox";
           }
         ];
       };
