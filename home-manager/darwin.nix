@@ -4,7 +4,7 @@
   imports = [
     ./darwin-modules
   ];
-  
+
   home = {
     username = "noahj";
     homeDirectory = "/Users/noahj";
@@ -13,7 +13,6 @@
       # CLI Apps
       # Development
       bun
-      cargo
       gh
       git
       just
@@ -22,7 +21,7 @@
       nixfmt-tree
       prettierd
       python3
-      rustc
+      rustup
       yaak
       # Files
       tree
@@ -46,7 +45,6 @@
       # blender
       # Development
       jetbrains.datagrip
-      alacritty
       # Game Development
       love
       # Games
@@ -57,12 +55,12 @@
       # CAD Software
       # kicad
       # Social
-      vesktop
+      # vesktop
       # Virtualisation
-      colima
-      docker
-      docker-compose
-      utm
+      # docker
+      # docker-compose
+      # colima
+      # utm
       # Work
       obsidian
 
@@ -77,6 +75,12 @@
     enable = true;
     # custom settings
     settings = {
+      font = {
+        normal = {
+          family = "Lilex Nerd Font";
+          style = "Regular";
+        };
+      };
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
       general.import = [ pkgs.alacritty-theme.nightfox ];

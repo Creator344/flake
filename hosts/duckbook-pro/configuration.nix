@@ -28,17 +28,36 @@
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
 
+
+
   homebrew = {
     enable = true;
-    casks = [
-      # Containerisation
-      "docker-desktop"
+    brews = [
       # Development
+      "atuin"
+      "cocoapods"
+      # Documents
+      "pandoc"
+      "librsvg"
+      # Window Managers
+      "asmvik/formulae/yabai"
+    ];
+    casks = [
+      # CLI 
+      "jandedobbeleer/oh-my-posh/oh-my-posh"
+      # Development
+      "android-studio"
       "zed"
+      # Documents
+      "homebrew/cask/basictex"
+      # Fonts
+      "font-geist-mono-nerd-font"
+      "font-lilex-nerd-font"
       # Game Development
       "godot"
       "unity-hub"
       # Games
+      "openemu"
       "roblox"
       "robloxstudio"
       "steam"
@@ -46,10 +65,16 @@
       "raycast"
       # Networking
       "cloudflare-warp"
+      # Organisation
+      "activitywatch"
       # Password Manager
       "bitwarden"
       # Web Browsing
       "helium-browser"
     ];
+  };
+  imports = [ ./ollama.nix ];
+  services.ollama = {
+    enable = true;
   };
 }

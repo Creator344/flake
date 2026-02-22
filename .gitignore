@@ -1,1 +1,6 @@
 .DS_Store
+caddy
+srv
+searxng/uwsgi.ini
+.env
+settings.yml
