@@ -1,11 +1,11 @@
 { inputs, pkgs, ... }:
-let
-  heliumBrowser = pkgs.callPackage ./modules/helium/default.nix { };
-in
+
 {
   imports = [
-    ./modules
+    ./nixos-modules
     inputs.spicetify-nix.homeManagerModules.default
+    inputs.niri.homeModules.niri
+    inputs.noctalia.homeModules.default
   ];
 
   home = {
@@ -15,6 +15,11 @@ in
 
   home.packages = with pkgs; [
     # CLI Apps
+    # Audio
+    alsa-utils
+    # Clipboard
+    cliphist
+    wl-clipboard
     # Development
     bun
     cargo
@@ -31,7 +36,6 @@ in
     nodePackages.vercel
     nvidia-container-toolkit
     prettierd
-    python3
     p7zip
     rustc
     sqlite
@@ -58,6 +62,12 @@ in
     cloudflare-warp
     dig
     nmap
+    # Python
+    (python3.withPackages (
+      p: with p; [
+        pyqt6
+      ]
+    ))
     # System Configuration
     brightnessctl
     # System Info
@@ -75,50 +85,41 @@ in
     # Game Development
     godot
     # Games
+    unstable.balatro-mod-manager
     heroic
     love
     mindustry-wayland
     prismlauncher
-    steam
+    millennium-steam
     unstable.shattered-pixel-dungeon
     # Games Modding
     r2modman
     # General
-    heliumBrowser
     kdePackages.dolphin
     pavucontrol
     qbittorrent
+    unstable.quickshell
     # Media
+    gimp
     handbrake
     kicad
     # Social
     vesktop
     # Work
-    libreoffice
     obsidian
-    teams-for-linux
-    # 3D Printing
-    bambu-studio
+
+    # Niri
+    xdg-desktop-portal-gnome
+    xwayland-satellite
 
     # Fonts
     nerd-fonts.geist-mono
-
-    # Hyprland
-    # App Launcher
-    tofi
-    # Bars
-    waybar
-    # Clipboard
-    clipse
-    # Colour Picker
-    hyprpicker
-    # Compatibility
-    gnome-network-displays
-    # Desktop Background
-    hyprpaper
-    # Screenshots
-    grimblast
   ];
+
+  programs.floorp = {
+    enable = true;
+    package = pkgs.floorp-bin;
+  };
 
   programs.starship = {
     enable = true;
@@ -135,8 +136,15 @@ in
         hidePodcasts
         shuffle
       ];
-      theme = spicePkgs.themes.sleek;
-      colorScheme = "Deeper";
+      theme = {
+        name = "Comfy";
+        src = pkgs.fetchFromGitHub {
+          owner = "Comfy-Themes";
+          repo = "Spicetify";
+          rev = "main";
+          hash = "sha256-sqvmSXJMLE2in/cB8ZIJE/t4J5D0PKRddWECdYJjgX0=";
+        };
+      };
     };
 
   # basic configuration of git
@@ -151,10 +159,20 @@ in
     enable = true;
     # custom settings
     settings = {
+      general.import = [
+        "~/.config/alacritty/themes/noctalia.toml"
+      ];
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
-      general.import = [ pkgs.alacritty-theme.nightfox ];
       window.opacity = 0.8;
+    };
+  };
+
+  programs.atuin = {
+    enable = true;
+    settings = {
+      search_mode = "fuzzy";
+      enter_accept = true;
     };
   };
 
@@ -172,5 +190,5 @@ in
       urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
     };
   };
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 }
