@@ -9,6 +9,7 @@
     };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
+    };
     nixpkgs-darwin = {
       url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
     };
@@ -17,7 +18,7 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
     home-manager-nixos = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager-darwin = {
@@ -33,11 +34,15 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
-    stylix.url = "github:nix-community/stylix/release-25.11";
     niri.url = "github:sodiboo/niri-flake";
+    millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
   };
 
   outputs =
@@ -50,46 +55,45 @@
     }@inputs:
     {
       nixosConfigurations = {
-        duckbook = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            inputs.stylix.nixosModules.stylix
-            inputs.nix-flatpak.nixosModules.nix-flatpak
-            (_: {
-              nixpkgs.overlays = [
-                inputs.alacritty-theme.overlays.default
-                (final: prev: {
-                  unstable = import inputs.nixpkgs-unstable {
-                    system = "x86_64-linux";
-                    config.allowUnfree = true;
-                  };
-                })
-              ];
-            })
+        # duckbook = nixpkgs.lib.nixosSystem {
+        #   system = "x86_64-linux";
+        #   modules = [
+        #     inputs.nix-flatpak.nixosModules.nix-flatpak
+        #     (_: {
+        #       nixpkgs.overlays = [
+        #         inputs.alacritty-theme.overlays.default
+        #         (final: prev: {
+        #           unstable = import inputs.nixpkgs-unstable {
+        #             system = "x86_64-linux";
+        #             config.allowUnfree = true;
+        #           };
+        #         })
+        #       ];
+        #     })
 
-            ./hosts/duckbook/configuration.nix
+        #     ./hosts/duckbook/configuration.nix
 
-            inputs.home-manager-nixos.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = { inherit inputs; };
-                users.noahj = import ./home-manager/nixos.nix;
-              };
-            }
-          ];
-        };
+        #     inputs.home-manager-nixos.nixosModules.home-manager
+        #     {
+        #       home-manager = {
+        #         useGlobalPkgs = true;
+        #         useUserPackages = true;
+        #         extraSpecialArgs = { inherit inputs; };
+        #         users.noahj = import ./home-manager/nixos.nix;
+        #       };
+        #     }
+        #   ];
+        # };
 
         duck = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            inputs.stylix.nixosModules.stylix
             inputs.nix-flatpak.nixosModules.nix-flatpak
             ./hosts/duck/configuration.nix
 
             (_: {
               nixpkgs.overlays = [
+                inputs.millennium.overlays.default
                 inputs.alacritty-theme.overlays.default
                 (final: prev: {
                   unstable = import inputs.nixpkgs-unstable {

@@ -4,7 +4,7 @@
   imports = [
     ./darwin-modules
   ];
-  
+
   home = {
     username = "noahj";
     homeDirectory = "/Users/noahj";

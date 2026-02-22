@@ -74,18 +74,29 @@
     ];
   };
 
-  programs.hyprland.enable = true;
-  programs.hyprlock.enable = true;
-
   environment.systemPackages = with pkgs; [
     wget
     git
     alacritty
-    mako
     tofi
     lsscsi
     cudatoolkit
   ];
+
+  programs.niri.enable = true;
+
+  environment.variables.NIXOS_OZONE_WL = "1";
+  environment.pathsToLink = [
+    "/share/application"
+    "/share/xdg-desktop-portal"
+  ];
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+    ];
+  };
 
   virtualisation.docker = {
     enable = true;
@@ -183,10 +194,7 @@
     ];
   };
 
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-  };
+  services.displayManager.cosmic-greeter.enable = true;
 
   services.xserver.videoDrivers = [ "nvidia" ];
 

@@ -1,12 +1,11 @@
 { inputs, pkgs, ... }:
-let
-  heliumBrowser = pkgs.callPackage ./modules/helium/default.nix { };
-in
+
 {
   imports = [
-    ./modules
+    ./nixos-modules
     inputs.spicetify-nix.homeManagerModules.default
     inputs.niri.homeModules.niri
+    inputs.noctalia.homeModules.default
   ];
 
   home = {
@@ -16,6 +15,11 @@ in
 
   home.packages = with pkgs; [
     # CLI Apps
+    # Audio
+    alsa-utils
+    # Clipboard
+    cliphist
+    wl-clipboard
     # Development
     bun
     cargo
@@ -76,20 +80,22 @@ in
     # Game Development
     godot
     # Games
+    unstable.balatro-mod-manager
     heroic
     love
     mindustry-wayland
     prismlauncher
-    steam
+    millennium-steam
     unstable.shattered-pixel-dungeon
     # Games Modding
     r2modman
     # General
-    heliumBrowser
     kdePackages.dolphin
     pavucontrol
     qbittorrent
+    unstable.quickshell
     # Media
+    gimp
     handbrake
     kicad
     # Social
@@ -97,26 +103,19 @@ in
     # Work
     obsidian
 
+    # Niri
+    xdg-desktop-portal-gnome
+    xwayland-satellite
+
     # Fonts
     nerd-fonts.geist-mono
-
-    # Hyprland
-    # App Launcher
-    tofi
-    # Bars
-    waybar
-    # Clipboard
-    clipse
-    # Colour Picker
-    hyprpicker
-    # Compatibility
-    gnome-network-displays
-    # Desktop Background
-    hyprpaper
-    # Screenshots
-    grimblast
   ];
-  
+
+  programs.floorp = {
+    enable = true;
+    package = pkgs.floorp-bin;
+  };
+
   programs.starship = {
     enable = true;
   };
@@ -132,19 +131,22 @@ in
         hidePodcasts
         shuffle
       ];
-      theme = spicePkgs.themes.sleek;
-      colorScheme = "Deeper";
+      theme = {
+        name = "Comfy";
+        src = pkgs.fetchFromGitHub {
+          owner = "Comfy-Themes";
+          repo = "Spicetify";
+          rev = "main";
+          hash = "sha256-sqvmSXJMLE2in/cB8ZIJE/t4J5D0PKRddWECdYJjgX0=";
+        };
+      };
     };
 
   # basic configuration of git
   programs.git = {
     enable = true;
-    settings = {
-      user = {
-        name = "Creator34";
-        email = "98237272+Creator344@users.noreply.github.com";
-      };
-    };
+    userName = "Creator34";
+    userEmail = "98237272+Creator344@users.noreply.github.com";
   };
 
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
@@ -152,10 +154,20 @@ in
     enable = true;
     # custom settings
     settings = {
+      general.import = [
+        "~/.config/alacritty/themes/noctalia.toml"
+      ];
       scrolling.multiplier = 5;
       selection.save_to_clipboard = true;
-      general.import = [ pkgs.alacritty-theme.nightfox ];
       window.opacity = 0.8;
+    };
+  };
+
+  programs.atuin = {
+    enable = true;
+    settings = {
+      search_mode = "fuzzy";
+      enter_accept = true;
     };
   };
 
@@ -173,5 +185,5 @@ in
       urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
     };
   };
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
 }
