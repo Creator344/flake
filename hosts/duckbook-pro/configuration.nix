@@ -6,6 +6,7 @@
 
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
+  nix.enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -28,7 +29,17 @@
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
 
-
+  nixpkgs.overlays = [
+    (final: prev: {
+      pythonPackagesExtensions = (prev.pythonPackagesExtensions or [ ]) ++ [
+        (python-final: python-prev: {
+          accelerate = python-prev.accelerate.overrideAttrs (_: {
+            doCheck = false;
+          });
+        })
+      ];
+    })
+  ];
 
   homebrew = {
     enable = true;
@@ -39,12 +50,16 @@
       # Documents
       "pandoc"
       "librsvg"
-      # Window Managers
-      "asmvik/formulae/yabai"
     ];
     casks = [
-      # CLI 
+      # CAD Software
+      "kicad"
+      # CLI
       "jandedobbeleer/oh-my-posh/oh-my-posh"
+      # Crypto
+      "monero-wallet"
+      # Desktop
+      "xquartz"
       # Development
       "android-studio"
       "zed"
@@ -57,7 +72,9 @@
       "godot"
       "unity-hub"
       # Games
+      "moonlight"
       "openemu"
+      "prismlauncher"
       "roblox"
       "robloxstudio"
       "steam"
@@ -67,14 +84,10 @@
       "cloudflare-warp"
       # Organisation
       "activitywatch"
-      # Password Manager
-      "bitwarden"
       # Web Browsing
       "helium-browser"
+      # Window Managers
+      "glide"
     ];
-  };
-  imports = [ ./ollama.nix ];
-  services.ollama = {
-    enable = true;
   };
 }

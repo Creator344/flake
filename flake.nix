@@ -43,6 +43,9 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
     niri.url = "github:sodiboo/niri-flake";
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
+    nix-openclaw.url = "github:openclaw/nix-openclaw";
+    nix-steipete-tools.url = "github:openclaw/nix-steipete-tools";
+    agenix.url = "github:ryantm/agenix";
   };
 
   outputs =
@@ -125,6 +128,7 @@
 
             (_: {
               nixpkgs.overlays = [
+                inputs.nix-openclaw.overlays.default
                 inputs.alacritty-theme.overlays.default
                 (final: prev: {
                   unstable = import inputs.nixpkgs-unstable {

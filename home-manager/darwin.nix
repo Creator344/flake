@@ -1,8 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 {
   imports = [
     ./darwin-modules
+    inputs.agenix.homeManagerModules.default
+    inputs.nix-openclaw.homeManagerModules.openclaw
   ];
 
   home = {
@@ -48,29 +50,22 @@
       # Game Development
       love
       # Games
-      prismlauncher
       unstable.shattered-pixel-dungeon
       # General
       qbittorrent
-      # CAD Software
-      # kicad
       # Social
-      # vesktop
-      # Virtualisation
-      # docker
-      # docker-compose
-      # colima
-      # utm
+      unstable.vesktop
+      utm
+      # Web Browser
+      unstable.floorp-bin
       # Work
       obsidian
-
-      # Web Apps
-      # open-webui # dependency python3 accelerate broken as of 26/01/26
 
       nerd-fonts.geist-mono
 
     ];
   };
+
   programs.alacritty = {
     enable = true;
     # custom settings
@@ -90,6 +85,31 @@
         padding = {
           x = 10;
           y = 10;
+        };
+      };
+    };
+  };
+
+  services.syncthing = {
+    enable = true;
+    overrideDevices = true;
+    overrideFolders = true;
+    settings = {
+      devices = {
+        "duck" = {
+          id = "45WTVCL-QVOJ7GI-ASNVZED-BXBUTBI-WLPGIXN-MPAXMKV-TZKHAEI-HYZECQB";
+        };
+      };
+      folders = {
+        "mxrat-5fhnc" = {
+          label = "Documents";
+          path = "/Users/noahj/Documents/";
+          devices = [ "duck" ];
+        };
+        "jjvlc-rbkuk" = {
+          label = "Prism Instances";
+          path = "/Users/noahj/Library/Application Support/PrismLauncher/instances/";
+          devices = [ "duck" ];
         };
       };
     };
