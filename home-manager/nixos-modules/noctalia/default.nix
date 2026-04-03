@@ -23,7 +23,6 @@
         terminalCommand = "alacritty";
       };
     };
-    systemd.enable = true;
     settings = {
       appLauncher.enableClipboardHistory = true;
       bar = {

@@ -6,6 +6,7 @@
     settings = {
       spawn-at-startup = [
         { command = [ "vesktop" ]; }
+        { command = [ "noctalia-shell" ]; }
       ];
       input = {
         focus-follows-mouse.enable = true;
@@ -26,9 +27,7 @@
           "launcher"
           "clipboard"
         ];
-        "Mod+Shift+C".action.spawn-sh = [
-          "aplay /home/noahj/something.wav"
-        ];
+        "Mod+F".action.toggle-window-floating = [ ];
         "Mod+C".action.close-window = [ ];
         "Mod+S".action.toggle-overview = [ ];
         "Mod+H".action.focus-column-left = [ ];
@@ -39,13 +38,15 @@
         "Mod+Up".action.focus-window-up = [ ];
         "Mod+L".action.focus-column-right = [ ];
         "Mod+Right".action.focus-column-right = [ ];
-        "Mod+Shift+H".action.move-column-left = [ ];
+        "Mod+Shift+C".action.spawn-sh = [
+          "aplay /home/noahj/something.wav"
+        ];
+        "Mod+Shift+M".action.maximize-window-to-edges = [ ];
+        "Mod+Shift+F".action.fullscreen-window = [ ];
+        "Mod+Shift+W".action.toggle-windowed-fullscreen = [ ];
         "Mod+Shift+Left".action.move-column-left = [ ];
-        "Mod+Shift+J".action.move-window-down = [ ];
         "Mod+Shift+Down".action.move-window-down = [ ];
-        "Mod+Shift+K".action.move-window-up = [ ];
         "Mod+Shift+Up".action.move-window-up = [ ];
-        "Mod+Shift+L".action.move-column-right = [ ];
         "Mod+Shift+Right".action.move-column-right = [ ];
         "Mod+WheelScrollDown".action.focus-workspace-down = [ ];
         "Mod+WheelScrollUp".action.focus-workspace-up = [ ];
@@ -58,6 +59,14 @@
             width = 1920;
             height = 1080;
             refresh = 60.0;
+          };
+          scale = 1;
+        };
+        "eDP-1" = {
+          mode = {
+            width = 1920;
+            height = 1080;
+            refresh = 60.001;
           };
           scale = 1;
         };
