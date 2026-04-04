@@ -6,13 +6,9 @@
 
   # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
-  nix.enable = false;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # Allow broken packages
-  nixpkgs.config.allowBroken = true;
 
   # Enable alternative shell support in nix-darwin.
   # programs.fish.enable = true;
@@ -28,18 +24,6 @@
 
   # The platform the configuration will be used on.
   nixpkgs.hostPlatform = "aarch64-darwin";
-
-  nixpkgs.overlays = [
-    (final: prev: {
-      pythonPackagesExtensions = (prev.pythonPackagesExtensions or [ ]) ++ [
-        (python-final: python-prev: {
-          accelerate = python-prev.accelerate.overrideAttrs (_: {
-            doCheck = false;
-          });
-        })
-      ];
-    })
-  ];
 
   homebrew = {
     enable = true;
@@ -80,12 +64,16 @@
       "steam"
       # General
       "raycast"
+      # DAW Plugins
+      "surge-xt"
       # Networking
       "cloudflare-warp"
       # Organisation
       "activitywatch"
-      # Web Browsing
-      "helium-browser"
+      # Password Manager
+      "bitwarden"
+      # Remote Access
+      "parsec"
       # Window Managers
       "glide"
     ];

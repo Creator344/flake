@@ -3,8 +3,7 @@
 {
   imports = [
     ./darwin-modules
-    inputs.agenix.homeManagerModules.default
-    inputs.nix-openclaw.homeManagerModules.openclaw
+    inputs.spicetify-nix.homeManagerModules.default
   ];
 
   home = {
@@ -50,14 +49,9 @@
       # Game Development
       love
       # Games
-      unstable.shattered-pixel-dungeon
+      shattered-pixel-dungeon
       # General
       qbittorrent
-      # Social
-      unstable.vesktop
-      utm
-      # Web Browser
-      unstable.floorp-bin
       # Work
       obsidian
 
@@ -89,6 +83,72 @@
       };
     };
   };
+
+  programs.vesktop = {
+    enable = true;
+    package = pkgs.vesktop;
+    settings = {
+      discordBranch = "stable";
+      transparencyOption = "none";
+      tray = true;
+      minimizeToTray = true;
+      autoStartMinimized = true;
+      openLinksWithElectron = false;
+      staticTitle = false;
+      enableMenu = false;
+      disableSmoothScroll = false;
+      hardwareAcceleration = true;
+      hardwareVideoAcceleration = true;
+      arRPC = true;
+      appBadge = true;
+      enableTaskbarFlashing = false;
+      disableMinSize = true;
+      clickTrayToShowHide = true;
+      customTitleBar = false;
+
+      enableSplashScreen = true;
+      splashTheming = true;
+    };
+    vencord = {
+      settings = {
+        cloud = {
+          authenticated = true;
+          url = "https://api.vencord.dev/";
+          settingsSync = true;
+          settingsSyncVersion = 0;
+        };
+      };
+    };
+  };
+
+  programs.floorp = {
+    enable = true;
+    policies = {
+      ExtensionSettings = {
+        "uBlock0@raymondhill.net" = {
+          default_area = "menupanel";
+          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
+          installation_mode = "force_installed";
+          private_browsing = true;
+        };
+      };
+    };
+  };
+
+  programs.spicetify =
+    let
+      spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
+    in
+    {
+      enable = true;
+      enabledExtensions = with spicePkgs.extensions; [
+        adblockify
+        hidePodcasts
+        shuffle
+      ];
+      theme = spicePkgs.themes.sleek;
+      colorScheme = "UltraBlack";
+    };
 
   services.syncthing = {
     enable = true;

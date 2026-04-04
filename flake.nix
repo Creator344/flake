@@ -2,27 +2,21 @@
   description = "Creator34's NixOS flake";
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-25.11";
-    };
-    nixpkgs-unstable = {
-      url = "github:NixOS/nixpkgs/nixos-unstable";
+      url = "github:NixOS/nixpkgs";
     };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
     };
-    nixpkgs-darwin = {
-      url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
-    };
     nix-darwin = {
-      url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
+      url = "github:nix-darwin/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager-nixos = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager-darwin = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
@@ -36,23 +30,18 @@
     };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.6.0";
     niri.url = "github:sodiboo/niri-flake";
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
-    nix-openclaw.url = "github:openclaw/nix-openclaw";
-    nix-steipete-tools.url = "github:openclaw/nix-steipete-tools";
-    agenix.url = "github:ryantm/agenix";
   };
 
   outputs =
     {
       nixpkgs,
       nix-darwin,
-      nixpkgs-darwin,
       nix-homebrew,
       ...
     }@inputs:
@@ -94,7 +83,7 @@
             inputs.nix-flatpak.nixosModules.nix-flatpak
             (_: {
               nixpkgs.overlays = [
-		inputs.millennium.overlays.default
+                inputs.millennium.overlays.default
                 inputs.alacritty-theme.overlays.default
                 (final: prev: {
                   unstable = import inputs.nixpkgs-unstable {
@@ -119,7 +108,6 @@
           ];
         };
 
-
         duck = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
@@ -131,7 +119,7 @@
                 inputs.millennium.overlays.default
                 inputs.alacritty-theme.overlays.default
                 (final: prev: {
-                  unstable = import inputs.nixpkgs-unstable {
+                  unstable = import inputs.nixpkgs {
                     system = "x86_64-linux";
                     config.allowUnfree = true;
                   };
@@ -160,14 +148,7 @@
 
             (_: {
               nixpkgs.overlays = [
-                inputs.nix-openclaw.overlays.default
                 inputs.alacritty-theme.overlays.default
-                (final: prev: {
-                  unstable = import inputs.nixpkgs-unstable {
-                    system = "aarch64-darwin";
-                    config.allowUnfree = true;
-                  };
-                })
               ];
             })
 
