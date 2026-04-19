@@ -14,6 +14,10 @@
           enabled = true;
           sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
         };
+        polkit-agent = {
+          enabled = true;
+          sourceUrl = "https://github.com/noctalia-dev/noctalia-plugins";
+        };
       };
       version = 2;
     };
@@ -70,47 +74,21 @@
         generationMethod = "faithful";
       };
       templates = {
-        activeTemplates = [
-          {
-            enabled = true;
-            id = "alacritty";
-          }
-          {
-            enabled = true;
-            id = "gtk";
-          }
-          {
-            enabled = true;
-            id = "qt";
-          }
-          {
-            enabled = true;
-            id = "kcolorscheme";
-          }
-          {
-            enabled = true;
-            id = "niri";
-          }
-          {
-            enabled = true;
-            id = "steam";
-          }
-          {
-            enabled = true;
-            id = "discord";
-          }
-          {
-            enabled = true;
-            id = "btop";
-          }
-          {
-            enabled = true;
-            id = "zed";
-          }
-          {
-            enabled = true;
-            id = "pywalfox";
-          }
+        activeTemplates = map (id: {
+          inherit id;
+          enabled = true;
+        }) [
+          "alacritty"
+          "gtk"
+          "qt"
+          "kcolorscheme"
+          "niri"
+          "steam"
+          "discord"
+          "btop"
+          "zed"
+          "yazi"
+          "spicetify"
         ];
       };
       general = {

@@ -5,7 +5,8 @@
       url = "github:NixOS/nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin";
@@ -36,6 +37,10 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     niri.url = "github:sodiboo/niri-flake";
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
+    blender-bin = {
+      url = "github:edolstra/nix-warez/?dir=blender";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -116,6 +121,7 @@
 
             (_: {
               nixpkgs.overlays = [
+                inputs.blender-bin.overlays.default
                 inputs.millennium.overlays.default
                 inputs.alacritty-theme.overlays.default
                 (final: prev: {

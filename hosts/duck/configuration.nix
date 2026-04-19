@@ -25,7 +25,7 @@
       "x-gvfs-show"
       "uid=noahj"
       "gid=users"
-      "umask=002"
+      "umask=000"
     ];
   };
 
@@ -39,7 +39,7 @@
       "x-gvfs-show"
       "uid=noahj"
       "gid=users"
-      "umask=002"
+      "umask=000"
     ];
   };
 
@@ -71,6 +71,8 @@
       "networkmanager"
       "wheel"
       "docker"
+      "uinput"
+      "video"
     ];
   };
 
@@ -158,8 +160,14 @@
   ];
 
   services.flatpak.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings = {
+      X11Forwarding = true;
+    };
+  };
 
   services.printing = {
     enable = true;
@@ -194,7 +202,29 @@
     ];
   };
 
-  services.displayManager.cosmic-greeter.enable = true;
+  services.displayManager = {
+    cosmic-greeter = {
+      enable = true;
+    };
+    autoLogin = {
+      enable = true;
+      user = "noahj";
+    };
+  };
+
+  # Enables the uinput kernel module and creates the uinput group
+  hardware.uinput.enable = true;
+
+  services.sunshine = {
+    enable = true;
+    package = pkgs.sunshine.override {
+      cudaSupport = true;
+      cudaPackages = pkgs.cudaPackages;
+    };
+    autoStart = true;
+    capSysAdmin = true; # only needed for Wayland -- omit this when using with Xorg
+    openFirewall = true;
+  };
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
@@ -206,4 +236,10 @@
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
+
+  nix.settings = {
+    substituters = [ "https://cache.nixos-cuda.org" ];
+    trusted-public-keys = [ "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=" ];
+  };
+
 }

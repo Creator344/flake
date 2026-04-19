@@ -11,6 +11,7 @@
       input = {
         focus-follows-mouse.enable = true;
       };
+      screenshot-path = null;
       binds = {
         "Ctrl+Alt+T".action.spawn = [ "alacritty" ];
         "Mod+Space".action.spawn = [
@@ -27,7 +28,11 @@
           "launcher"
           "clipboard"
         ];
+        "Mod+Shift+C".action.spawn-sh = [
+          "aplay /home/noahj/something.wav"
+        ];
         "Mod+F".action.toggle-window-floating = [ ];
+        "Mod+Shift+S".action.screenshot = [ ];
         "Mod+C".action.close-window = [ ];
         "Mod+S".action.toggle-overview = [ ];
         "Mod+H".action.focus-column-left = [ ];

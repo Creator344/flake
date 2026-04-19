@@ -15,6 +15,8 @@
 
   home.packages = with pkgs; [
     # CLI Apps
+    # AI
+    opencode
     # Audio
     alsa-utils
     # Clipboard
@@ -26,7 +28,7 @@
     cmake
     gcc
     gh
-    unstable.jdk25
+    jdk25
     just
     nil
     ninja
@@ -78,43 +80,52 @@
 
     # Desktop Apps
     # 3D Modelling
-    unstable.blender
+    blender-bin
     # Development
     jetbrains.datagrip
-    unstable.zed-editor
+    zed-editor
     # Game Development
     godot
     # Games
-    unstable.balatro-mod-manager
+    balatro-mod-manager
     heroic
     love
+    lutris
     mindustry-wayland
     prismlauncher
     millennium-steam
-    unstable.shattered-pixel-dungeon
+    shattered-pixel-dungeon
     # Games Modding
     r2modman
     # General
-    kdePackages.dolphin
     pavucontrol
     qbittorrent
-    unstable.quickshell
     # Media
     gimp
     handbrake
     kicad
+    uxplay
     # Social
+    element-desktop
+    thunderbird-bin
     vesktop
     # Work
     obsidian
 
     # Niri
     xdg-desktop-portal-gnome
+    gcr
+    xdg-desktop-portal-gtk
     xwayland-satellite
+    yad
 
     # Fonts
     nerd-fonts.geist-mono
+
+    kdePackages.dolphin
   ];
+
+  services.gnome-keyring.enable = true;
 
   programs.floorp = {
     enable = true;
@@ -122,6 +133,10 @@
   };
 
   programs.starship = {
+    enable = true;
+  };
+
+  programs.yazi = {
     enable = true;
   };
 
@@ -194,5 +209,29 @@
       urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
     };
   };
+
+  services.syncthing = {
+    enable = true;
+    settings = {
+      devices = {
+        "duckbook-pro" = {
+          id = "FZ7VHHN-44BEWPF-J3RGNF5-FZWHBLL-URP44HN-OHVJQV5-TF2EIML-DJ54CAM";
+        };
+      };
+      folders = {
+        "mxrat-5fhnc" = {
+          label = "Documents";
+          path = "/home/noahj/Documents";
+          devices = [ "duckbook-pro" ];
+        };
+        "jjvlc-rbkuk" = {
+          label = "Prism Instances";
+          path = "/drives/SSD_STORAGE/Prism\ Launcher/";
+          devices = [ "duckbook-pro" ];
+        };
+      };
+    };
+  };
+
   home.stateVersion = "25.11";
 }
