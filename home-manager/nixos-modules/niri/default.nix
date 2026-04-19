@@ -28,9 +28,6 @@
           "launcher"
           "clipboard"
         ];
-        "Mod+Shift+C".action.spawn-sh = [
-          "aplay /home/noahj/something.wav"
-        ];
         "Mod+F".action.toggle-window-floating = [ ];
         "Mod+Shift+S".action.screenshot = [ ];
         "Mod+C".action.close-window = [ ];

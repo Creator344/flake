@@ -12,14 +12,6 @@
       url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    home-manager-nixos = {
-      url = "github:nix-community/home-manager/release-25.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    home-manager-darwin = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-homebrew.url = "github:zhaofengli/nix-homebrew";
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
@@ -101,7 +93,7 @@
 
             ./hosts/crapbook/configuration.nix
 
-            inputs.home-manager-nixos.nixosModules.home-manager
+            inputs.home-manager.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
@@ -116,7 +108,6 @@
         duck = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            inputs.nix-flatpak.nixosModules.nix-flatpak
             ./hosts/duck/configuration.nix
 
             (_: {
@@ -133,7 +124,7 @@
               ];
             })
 
-            inputs.home-manager-nixos.nixosModules.home-manager
+            inputs.home-manager.nixosModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;
@@ -167,7 +158,7 @@
               };
             }
 
-            inputs.home-manager-darwin.darwinModules.home-manager
+            inputs.home-manager.darwinModules.home-manager
             {
               home-manager = {
                 useGlobalPkgs = true;

@@ -33,9 +33,8 @@
     nil
     ninja
     nixd
+    nixfmt
     nixfmt-tree
-    nixfmt-rfc-style
-    nodePackages.vercel
     nvidia-container-toolkit
     prettierd
     p7zip
@@ -80,7 +79,7 @@
 
     # Desktop Apps
     # 3D Modelling
-    blender-bin
+    blender_5_0
     # Development
     jetbrains.datagrip
     zed-editor
@@ -133,10 +132,6 @@
   };
 
   programs.starship = {
-    enable = true;
-  };
-
-  programs.yazi = {
     enable = true;
   };
 
