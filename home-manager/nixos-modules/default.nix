@@ -1,5 +1,6 @@
 {
   imports = [
+    ./floorp
     ./niri
     ./noctalia
   ];

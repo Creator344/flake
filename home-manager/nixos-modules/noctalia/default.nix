@@ -1,4 +1,11 @@
 {
+  programs.niri.settings.layer-rules = [
+    {
+      matches = [ { namespace = "^noctalia-overview*"; } ];
+      place-within-backdrop = true;
+    }
+  ];
+
   programs.noctalia-shell = {
     enable = true;
     plugins = {
@@ -74,22 +81,25 @@
         generationMethod = "faithful";
       };
       templates = {
-        activeTemplates = map (id: {
-          inherit id;
-          enabled = true;
-        }) [
-          "alacritty"
-          "gtk"
-          "qt"
-          "kcolorscheme"
-          "niri"
-          "steam"
-          "discord"
-          "btop"
-          "zed"
-          "yazi"
-          "spicetify"
-        ];
+        activeTemplates =
+          map
+            (id: {
+              inherit id;
+              enabled = true;
+            })
+            [
+              "alacritty"
+              "gtk"
+              "qt"
+              "kcolorscheme"
+              "niri"
+              "steam"
+              "discord"
+              "btop"
+              "zed"
+              "yazi"
+              "spicetify"
+            ];
       };
       general = {
         avatarImage = "/home/noahj/PFP.png";

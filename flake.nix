@@ -42,68 +42,39 @@
       nix-homebrew,
       ...
     }@inputs:
+    let
+      globalNixosModules = [
+        {
+          nixpkgs.overlays = [
+            inputs.blender-bin.overlays.default
+            inputs.millennium.overlays.default
+            inputs.alacritty-theme.overlays.default
+          ];
+        }
+        inputs.home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            extraSpecialArgs = { inherit inputs; };
+            users.noahj = import ./home-manager/nixos.nix;
+          };
+        }
+      ];
+      globalDarwinModules = [
+
+      ];
+    in
     {
       nixosConfigurations = {
         crapbook = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [
-            inputs.nix-flatpak.nixosModules.nix-flatpak
-            (_: {
-              nixpkgs.overlays = [
-                inputs.millennium.overlays.default
-                inputs.alacritty-theme.overlays.default
-                (final: prev: {
-                  unstable = import inputs.nixpkgs-unstable {
-                    system = "x86_64-linux";
-                    config.allowUnfree = true;
-                  };
-                })
-              ];
-            })
-
-            ./hosts/crapbook/configuration.nix
-
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = { inherit inputs; };
-                users.noahj = import ./home-manager/nixos.nix;
-              };
-            }
-          ];
+          modules = globalNixosModules ++ [ ./hosts/crapbook/configuration.nix ];
         };
 
         duck = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = [
-            ./hosts/duck/configuration.nix
-
-            (_: {
-              nixpkgs.overlays = [
-                inputs.blender-bin.overlays.default
-                inputs.millennium.overlays.default
-                inputs.alacritty-theme.overlays.default
-                (final: prev: {
-                  unstable = import inputs.nixpkgs {
-                    system = "x86_64-linux";
-                    config.allowUnfree = true;
-                  };
-                })
-              ];
-            })
-
-            inputs.home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = { inherit inputs; };
-                users.noahj = import ./home-manager/nixos.nix;
-              };
-            }
-          ];
+          modules = globalNixosModules ++ [ ./hosts/duck/configuration.nix ];
         };
       };
 
@@ -113,11 +84,11 @@
           modules = [
             ./hosts/duckbook-pro/configuration.nix
 
-            (_: {
+            {
               nixpkgs.overlays = [
                 inputs.alacritty-theme.overlays.default
               ];
-            })
+            }
 
             nix-homebrew.darwinModules.nix-homebrew
             {

@@ -89,7 +89,6 @@
     balatro-mod-manager
     heroic
     love
-    lutris
     mindustry-wayland
     prismlauncher
     millennium-steam
@@ -125,11 +124,6 @@
   ];
 
   services.gnome-keyring.enable = true;
-
-  programs.floorp = {
-    enable = true;
-    package = pkgs.floorp-bin;
-  };
 
   programs.starship = {
     enable = true;
