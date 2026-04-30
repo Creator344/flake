@@ -16,6 +16,7 @@
       bun
       gh
       git
+      jdk25
       just
       nil
       nixd
@@ -44,6 +45,8 @@
       # Desktop Apps
       # 3D Modelling
       # blender
+      # Audio
+      audacity
       # Development
       jetbrains.datagrip
       # Game Development
@@ -52,6 +55,8 @@
       shattered-pixel-dungeon
       # General
       qbittorrent
+      # Messaging
+      element-desktop
       # Work
       obsidian
 

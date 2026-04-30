@@ -66,6 +66,8 @@
       "raycast"
       # DAW Plugins
       "surge-xt"
+      # Mouse
+      "middleclick"
       # Networking
       "cloudflare-warp"
       # Organisation
