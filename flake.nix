@@ -57,7 +57,7 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             extraSpecialArgs = { inherit inputs; };
-            users.noahj = import ./home-manager/nixos.nix;
+            users.noahj = import ./home-manager/nixos;
           };
         }
       ];
@@ -105,7 +105,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = { inherit inputs; };
-                users.noahj = import ./home-manager/darwin.nix;
+                users.noahj = import ./home-manager/darwin;
               };
             }
           ];

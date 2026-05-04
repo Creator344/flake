@@ -1,7 +1,0 @@
-{
-  imports = [
-    ./floorp
-    ./niri
-    ./noctalia
-  ];
-}
