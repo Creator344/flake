@@ -63,9 +63,9 @@
     LC_TIME = "en_NZ.UTF-8";
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.noahj = {
     isNormalUser = true;
+    linger = true;
     description = "Noah Johnson";
     extraGroups = [
       "networkmanager"
@@ -73,6 +73,7 @@
       "docker"
       "uinput"
       "video"
+      "libvirt"
     ];
   };
 
@@ -83,9 +84,11 @@
     tofi
     lsscsi
     cudatoolkit
+    quickemu
   ];
 
   programs.niri.enable = true;
+  programs.umbriel.enable = true;
 
   environment.variables.NIXOS_OZONE_WL = "1";
   environment.pathsToLink = [
@@ -100,8 +103,10 @@
     ];
   };
 
-  virtualisation.docker = {
-    enable = true;
+  virtualisation = {
+    docker = {
+      enable = true;
+    };
   };
 
   hardware.nvidia-container-toolkit = {
@@ -110,6 +115,7 @@
 
   virtualisation.oci-containers = {
     backend = "docker";
+
     containers = {
       arm = {
         image = "automaticrippingmachine/automatic-ripping-machine:latest";
@@ -169,6 +175,8 @@
     };
   };
 
+  services.usbmuxd.enable = true;
+
   services.printing = {
     enable = true;
     drivers = with pkgs; [
@@ -203,12 +211,15 @@
   };
 
   services.displayManager = {
-    cosmic-greeter = {
+    noctalia-greeter = {
       enable = true;
-    };
-    autoLogin = {
-      enable = true;
-      user = "noahj";
+      settings = {
+        user.default = "noahj";
+        appearance = {
+          scheme = "Synced";
+          hide_logo = true;
+        };
+      };
     };
   };
 

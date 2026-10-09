@@ -2,24 +2,21 @@
   programs.niri.settings.binds = {
     "Ctrl+Alt+T".action.spawn = [ "alacritty" ];
     "Mod+Space".action.spawn = [
-      "noctalia-shell"
-      "ipc"
-      "call"
+      "noctalia"
+      "msg"
+      "panel-toggle"
       "launcher"
-      "toggle"
     ];
     "Mod+V".action.spawn = [
-      "noctalia-shell"
-      "ipc"
-      "call"
-      "launcher"
+      "noctalia"
+      "msg"
+      "panel-toggle"
       "clipboard"
     ];
     "Mod+L".action.spawn = [
-      "noctalia-shell"
-      "ipc"
-      "call"
-      "lockScreen"
+      "noctalia"
+      "msg"
+      "session"
       "lock"
     ];
     "Mod+F".action.toggle-window-floating = [ ];

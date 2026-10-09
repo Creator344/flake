@@ -12,14 +12,5 @@
         hidePodcasts
         shuffle
       ];
-      theme = {
-        name = "Comfy";
-        src = pkgs.fetchFromGitHub {
-          owner = "Comfy-Themes";
-          repo = "Spicetify";
-          rev = "main";
-          hash = "sha256-sqvmSXJMLE2in/cB8ZIJE/t4J5D0PKRddWECdYJjgX0=";
-        };
-      };
     };
 }

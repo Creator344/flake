@@ -1,7 +1,11 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
+
+    # ==========
     # CLI Apps
+    # ==========
+
     # AI
     opencode
     # Audio
@@ -17,6 +21,7 @@
     gh
     jdk25
     just
+    maven
     nil
     ninja
     nixd
@@ -33,11 +38,14 @@
     gnupg
     gnused
     gnutar
+    krename
+    package-version-server
     pandoc
     samba
     tree
     unzip
     which
+    xxdiff
     xz
     zip
     zstd
@@ -64,51 +72,64 @@
     powertop
     usbutils
 
-    # Desktop Apps
+    # ==========
+    # GUI Apps
+    # ==========
+
     # 3D Modelling
     blender_5_0
     # Development
     jetbrains.datagrip
-    zed-editor
+    # File Management
+    krusader
+    qdirstat
     # Game Development
     godot
+    vinegar
     # Games
     balatro-mod-manager
     heroic
     love
-    mindustry-wayland
     prismlauncher
     millennium-steam
+    satisfactorymodmanager
     shattered-pixel-dungeon
     # Games Modding
     r2modman
     # General
     pavucontrol
     qbittorrent
+    # iOS Sideloading
+    iloader
     # Media
+    aseprite
     gimp
     handbrake
     kicad
     uxplay
     # Social
     element-desktop
-    thunderbird-bin
-    vesktop
-    # Storage
-    qdirstat
+    # Virtualisation
+    (bottles.override { removeWarningPopup = true; })
+    virt-manager
     # Work
     obsidian
 
-    # Niri
-    xdg-desktop-portal-gnome
-    gcr
-    xdg-desktop-portal-gtk
-    xwayland-satellite
-    yad
+    # ==========
+    # Other
+    # ==========
+
+    # Bash Addons
+    blesh
 
     # Fonts
     nerd-fonts.geist-mono
 
-    kdePackages.dolphin
+    # Niri
+    xdg-desktop-portal-gnome
+    gcr_4
+    xdg-desktop-portal-gtk
+    xwayland-satellite
+    yad
   ];
 }

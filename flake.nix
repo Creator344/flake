@@ -2,7 +2,7 @@
   description = "Creator34's Nix flake";
   inputs = {
     nixpkgs = {
-      url = "github:NixOS/nixpkgs";
+      url = "github:nixos/nixpkgs/nixos-unstable";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -22,10 +22,13 @@
       flake = false;
     };
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
+      url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     niri.url = "github:sodiboo/niri-flake";
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
@@ -33,10 +36,24 @@
       url = "github:edolstra/nix-warez/?dir=blender";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    lix = {
+      url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
+      flake = false;
+    };
+
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.lix.follows = "lix";
+    };
+    nixcord.url = "github:4evy/nixcord";
+    umbriel.url = "git+https://github.com/noctalia-dev/umbriel";
+    zed.url = "github:zed-industries/zed";
   };
 
   outputs =
     {
+      self,
       nixpkgs,
       nix-darwin,
       nix-homebrew,
@@ -48,10 +65,11 @@
           nixpkgs.overlays = [
             inputs.blender-bin.overlays.default
             inputs.millennium.overlays.default
-            inputs.alacritty-theme.overlays.default
           ];
         }
+        inputs.lix-module.nixosModules.default
         inputs.home-manager.nixosModules.home-manager
+        inputs.umbriel.nixosModules.default
         {
           home-manager = {
             useGlobalPkgs = true;
@@ -61,17 +79,9 @@
           };
         }
       ];
-      globalDarwinModules = [
-
-      ];
     in
     {
       nixosConfigurations = {
-        crapbook = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = globalNixosModules ++ [ ./hosts/crapbook/configuration.nix ];
-        };
-
         duck = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = globalNixosModules ++ [ ./hosts/duck/configuration.nix ];

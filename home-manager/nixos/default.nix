@@ -9,6 +9,9 @@
     inputs.spicetify-nix.homeManagerModules.default
     inputs.niri.homeModules.niri
     inputs.noctalia.homeModules.default
+    inputs.stylix.homeModules.stylix
+    inputs.nixcord.homeModules.nixcord
+    inputs.umbriel.homeModules.default
   ];
 
   home = {

@@ -6,13 +6,13 @@ alias f := format
 hostname := `uname --nodename`
 
 rebuild:
-    sudo nixos-rebuild switch --flake ./#{{hostname}} --sudo
+    nixos-rebuild switch --flake ./#{{hostname}} --sudo
 
 tidy:
     nix-collect-garbage --delete-older-than 7d
 
 update:
-    nix flake update
+    nix flake update --option access-tokens "github.com=$(gh auth token)"
     just r
 
 format:

@@ -5,10 +5,15 @@
     ./bash
     ./floorp
     ./git
+    ./java
     ./niri
+    ./nixcord
     ./noctalia
     ./spicetify
     ./starship
+    ./stylix
     ./syncthing
+    ./umbriel
+    ./zed
   ];
 }
