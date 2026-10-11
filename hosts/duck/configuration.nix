@@ -160,6 +160,8 @@
     };
   };
 
+  services.usbmuxd.enable = true;
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"
@@ -174,8 +176,6 @@
       X11Forwarding = true;
     };
   };
-
-  services.usbmuxd.enable = true;
 
   services.printing = {
     enable = true;

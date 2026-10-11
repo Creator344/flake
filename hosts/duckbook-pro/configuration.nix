@@ -4,26 +4,20 @@
     home = "/Users/noahj";
   };
 
-  # Necessary for using flakes on this system.
   nix.settings.experimental-features = "nix-command flakes";
+  
+  nixpkgs = {
+    hostPlatform = "aarch64-darwin";
+    config.allowUnfree = true;
+  };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # Enable alternative shell support in nix-darwin.
-  # programs.fish.enable = true;
 
   # Set Git commit hash for darwin-version.
-  system.configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
-
-  system.primaryUser = "noahj";
-
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  system.stateVersion = 6;
-
-  # The platform the configuration will be used on.
-  nixpkgs.hostPlatform = "aarch64-darwin";
+  system = {
+    configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+    primaryUser = "noahj";
+    stateVersion = 6;
+  };
 
   homebrew = {
     enable = true;
@@ -46,6 +40,7 @@
       "xquartz"
       # Development
       "android-studio"
+      "vscodium"
       "zed"
       # Documents
       "homebrew/cask/basictex"
@@ -62,22 +57,20 @@
       "roblox"
       "robloxstudio"
       "steam"
-      # General
-      "raycast"
       # DAW Plugins
       "surge-xt"
-      # Mouse
-      "middleclick"
+      # Messaging
+      "equibop"
       # Networking
       "cloudflare-warp"
-      # Organisation
-      "activitywatch"
       # Password Manager
       "bitwarden"
       # Remote Access
       "parsec"
-      # Window Managers
-      "glide"
+      # Web Browser
+      "floorp"
+
+      "raycast"
     ];
   };
 }

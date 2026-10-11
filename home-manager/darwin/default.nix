@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./darwin-modules
+    ./modules
     inputs.spicetify-nix.homeManagerModules.default
   ];
 
@@ -45,6 +45,8 @@
       # Desktop Apps
       # 3D Modelling
       # blender
+      # Art
+      aseprite
       # Audio
       audacity
       # Development
@@ -84,43 +86,6 @@
         padding = {
           x = 10;
           y = 10;
-        };
-      };
-    };
-  };
-
-  programs.vesktop = {
-    enable = true;
-    package = pkgs.vesktop;
-    settings = {
-      discordBranch = "stable";
-      transparencyOption = "none";
-      tray = true;
-      minimizeToTray = true;
-      autoStartMinimized = true;
-      openLinksWithElectron = false;
-      staticTitle = false;
-      enableMenu = false;
-      disableSmoothScroll = false;
-      hardwareAcceleration = true;
-      hardwareVideoAcceleration = true;
-      arRPC = true;
-      appBadge = true;
-      enableTaskbarFlashing = false;
-      disableMinSize = true;
-      clickTrayToShowHide = true;
-      customTitleBar = false;
-
-      enableSplashScreen = true;
-      splashTheming = true;
-    };
-    vencord = {
-      settings = {
-        cloud = {
-          authenticated = true;
-          url = "https://api.vencord.dev/";
-          settingsSync = true;
-          settingsSyncVersion = 0;
         };
       };
     };

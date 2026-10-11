@@ -25,6 +25,7 @@
       url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,68 +57,26 @@
       self,
       nixpkgs,
       nix-darwin,
-      nix-homebrew,
       ...
     }@inputs:
-    let
-      globalNixosModules = [
-        {
-          nixpkgs.overlays = [
-            inputs.blender-bin.overlays.default
-            inputs.millennium.overlays.default
-          ];
-        }
-        inputs.lix-module.nixosModules.default
-        inputs.home-manager.nixosModules.home-manager
-        inputs.umbriel.nixosModules.default
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = { inherit inputs; };
-            users.noahj = import ./home-manager/nixos;
-          };
-        }
-      ];
-    in
     {
       nixosConfigurations = {
         duck = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          modules = globalNixosModules ++ [ ./hosts/duck/configuration.nix ];
+          modules = [
+            ./global-modules/nixos.nix
+            ./hosts/duck/configuration.nix
+          ];
         };
       };
 
       darwinConfigurations = {
         duckbook-pro = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
+          specialArgs = { inherit inputs; };
           modules = [
+            ./global-modules/darwin.nix
             ./hosts/duckbook-pro/configuration.nix
-
-            {
-              nixpkgs.overlays = [
-                inputs.alacritty-theme.overlays.default
-              ];
-            }
-
-            nix-homebrew.darwinModules.nix-homebrew
-            {
-              nix-homebrew = {
-                enable = true;
-                enableRosetta = true;
-                user = "noahj";
-              };
-            }
-
-            inputs.home-manager.darwinModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = { inherit inputs; };
-                users.noahj = import ./home-manager/darwin;
-              };
-            }
           ];
         };
       };
