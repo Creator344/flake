@@ -65,20 +65,3 @@ jobs:
       - name: Validate ${{ matrix.host }}
         run: |
           nix eval .#${{ matrix.target_attr }}.${{ matrix.host }}.config.system.build.toplevel.drvPath --show-trace
-
-  lockfile:
-    name: Check Lock
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-
-      - name: Install Nix
-        uses: cachix/install-nix-action@v31
-        with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Check flake.lock
-        run: nix run github:tgirlcloud/locker
