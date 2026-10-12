@@ -1,20 +1,84 @@
-name: flake check
+name: Validate Nix Flake
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
+    paths:
+      - "**.nix"
+      - "**.lock"
+      - ".github/workflows/check.yml"
   pull_request:
-  workflow_dispatch:
+
+permissions: {}
 
 jobs:
-  check:
+  lint:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: nixfmt
+            run: nix run nixpkgs#nixfmt-rfc-style -- --check ./**/*.nix
+          - name: statix
+            run: nix run nixpkgs#statix -- check .
+          - name: deadnix
+            run: nix run nixpkgs#deadnix -- --fail .
+    name: ${{ matrix.name }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
-      - uses: DeterminateSystems/nix-installer-action@v19
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Evaluate all configurations
+      - name: Run ${{ matrix.name }}
+        run: ${{ matrix.run }}
+
+  eval:
+    name: ${{ matrix.host }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - target_attr: nixosConfigurations
+            host: duck
+          - target_attr: darwinConfigurations
+            host: duckbook-pro
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Validate ${{ matrix.host }}
         run: |
-          nix eval .#nixosConfigurations.duck.config.system.build.toplevel.drvPath
-          nix eval .#darwinConfigurations.duckbook-pro.system.drvPath
+          nix eval .#${{ matrix.target_attr }}.${{ matrix.host }}.config.system.build.toplevel.drvPath --show-trace
+
+  lockfile:
+    name: Check Lock
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check flake.lock
+        run: nix run github:tgirlcloud/locker -- --distinct-branches

@@ -5,7 +5,11 @@
     enable = true;
 
     # This populates the userSettings "auto_install_extensions"
-    extensions = [ "nix" "toml" "make" ];
+    extensions = [
+      "nix"
+      "toml"
+      "make"
+    ];
 
     # Everything inside of these brackets are Zed options
     userSettings = {
@@ -39,7 +43,12 @@
         dock = "bottom";
         detect_venv = {
           on = {
-            directories = [ ".env" "env" ".venv" "venv" ];
+            directories = [
+              ".env"
+              "env"
+              ".venv"
+              "venv"
+            ];
             activate_script = "default";
           };
         };
@@ -68,7 +77,7 @@
       };
 
       languages = {
-        
+
       };
 
       vim_mode = false;

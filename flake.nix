@@ -55,7 +55,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       nix-darwin,
       ...

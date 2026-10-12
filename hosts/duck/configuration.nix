@@ -230,7 +230,7 @@
     enable = true;
     package = pkgs.sunshine.override {
       cudaSupport = true;
-      cudaPackages = pkgs.cudaPackages;
+      inherit (pkgs) cudaPackages;
     };
     autoStart = true;
     capSysAdmin = true; # only needed for Wayland -- omit this when using with Xorg
