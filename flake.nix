@@ -25,6 +25,7 @@
       url = "github:noctalia-dev/noctalia";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    noctalia-greeter.url = "github:noctalia-dev/noctalia-greeter";
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
     stylix = {
       url = "github:nix-community/stylix";
@@ -63,6 +64,7 @@
       nixosConfigurations = {
         duck = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
           modules = [
             ./global-modules/nixos.nix
             ./hosts/duck/configuration.nix
