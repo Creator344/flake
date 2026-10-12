@@ -26,7 +26,6 @@
     ninja
     nixd
     nixfmt
-    nixfmt-tree
     nvidia-container-toolkit
     prettierd
     p7zip

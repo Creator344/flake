@@ -13,7 +13,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.cudaSupport = true;
 
   fileSystems."/drives/2TB" = {
     device = "/dev/disk/by-label/2TB";
@@ -44,10 +43,6 @@
   };
 
   time.timeZone = "Pacific/Auckland";
-
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-36.9.5"
-  ];
 
   i18n.defaultLocale = "en_NZ.UTF-8";
 
@@ -92,7 +87,7 @@
 
   environment.variables.NIXOS_OZONE_WL = "1";
   environment.pathsToLink = [
-    "/share/application"
+    "/share/applications"
     "/share/xdg-desktop-portal"
   ];
 
@@ -249,8 +244,14 @@
   };
 
   nix.settings = {
-    substituters = [ "https://cache.nixos-cuda.org" ];
-    trusted-public-keys = [ "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=" ];
+    extra-substituters = [
+      "https://cache.nixos-cuda.org"
+      "https://zed.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+      "zed.cachix.org-1:/pHQ6dpMsAZk2DiP4WCL0p9YDNKWj2Q5FL20bNmw1cU="
+    ];
   };
 
 }

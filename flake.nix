@@ -50,7 +50,10 @@
     };
     nixcord.url = "github:4evy/nixcord";
     umbriel.url = "git+https://github.com/noctalia-dev/umbriel";
-    zed.url = "github:zed-industries/zed";
+    zed = {
+      url = "github:zed-industries/zed";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

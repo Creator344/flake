@@ -6,6 +6,7 @@
       nixpkgs.overlays = [
         inputs.blender-bin.overlays.default
         inputs.millennium.overlays.default
+        inputs.zed.overlays.default
       ];
     }
     inputs.lix-module.nixosModules.default

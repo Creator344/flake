@@ -14,6 +14,10 @@
         enable = true;
         enableRosetta = true;
         user = "noahj";
+        taps = {
+          "homebrew/homebrew-core" = inputs.homebrew-core;
+          "homebrew/homebrew-cask" = inputs.homebrew-cask;
+        };
       };
     }
 
