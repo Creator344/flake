@@ -6,7 +6,7 @@ alias f := format
 hostname := `uname --nodename`
 
 rebuild:
-    {{ if hostname == "duckbook-pro" { "darwin-rebuild switch --flake ./" + hostname } else { "nixos-rebuild switch --flake ./" + hostname + " --sudo" } }}
+    {{ if hostname == "duckbook-pro" { "darwin-rebuild switch --flake .#" + hostname } else { "nixos-rebuild switch --flake .#" + hostname + " --sudo" } }}
 
 tidy:
     nix-collect-garbage --delete-older-than 7d
