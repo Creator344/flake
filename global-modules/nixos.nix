@@ -2,14 +2,30 @@
 
 {
   imports = [
-    {
+    ({ pkgs, ... }: {
       nixpkgs.overlays = [
         inputs.blender-bin.overlays.default
         inputs.millennium.overlays.default
         inputs.zed.overlays.default
+        # Rewire tools that hardcode a Nix reference so they use Lix too
+        # (official recommendation from https://lix.systems/add-to-config)
+        (final: prev: {
+          inherit (prev.lixPackageSets.lix_2_96)
+            nixpkgs-review
+            nix-eval-jobs
+            nix-fast-build
+            colmena
+            nix-direnv
+            ;
+        })
       ];
-    }
-    inputs.lix-module.nixosModules.default
+      # Lix from nixpkgs (cached by cache.nixos.org), per
+      # https://lix.systems/add-to-config — replaces the lix/lix-module
+      # flake inputs, which are only meant for running Lix main.
+      # lix_2_96 explicitly: the stable/latest aliases in nixpkgs still
+      # point at 2.95; 2.96.0 is the current Lix stable (Oct 2026).
+      nix.package = pkgs.lixPackageSets.lix_2_96.lix;
+    })
     inputs.noctalia-greeter.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
     inputs.umbriel.nixosModules.default
