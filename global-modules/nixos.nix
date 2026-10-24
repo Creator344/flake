@@ -18,6 +18,10 @@
             nix-direnv
             ;
         })
+        # Temporary: drop HandBrake's A15 ffmpeg patch, which no longer
+        # applies to ffmpeg 8.1.3 (nixpkgs#576333). Delete with the file
+        # once nixpkgs#576407 lands.
+        (import ./overlay-handbrake-ffmpeg.nix)
       ];
       # Lix from nixpkgs (cached by cache.nixos.org), per
       # https://lix.systems/add-to-config — replaces the lix/lix-module
