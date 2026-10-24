@@ -1,0 +1,121 @@
+name: Discord activity feed
+
+# Posts one embed per activity event to the #github-noise Discord channel.
+# The webhook URL lives in the DISCORD_WEBHOOK_FLAKE repo secret because this
+# repository is public — never inline it here.
+on:
+  push:
+  pull_request:
+    types: [opened, reopened, closed, ready_for_review]
+  issues:
+    types: [opened, reopened, closed]
+  release:
+    types: [published]
+  workflow_run:
+    workflows: ["Validate Nix Flake"]
+    types: [completed]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: discord-feed-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post to #github-noise
+        env:
+          WEBHOOK: ${{ secrets.DISCORD_WEBHOOK_FLAKE }}
+          EVENT_NAME: ${{ github.event_name }}
+          SERVER_URL: ${{ github.server_url }}
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request
+
+          event = os.environ["EVENT_NAME"]
+          payload = json.load(open(os.environ["GITHUB_EVENT_PATH"]))
+          webhook = os.environ.get("WEBHOOK", "")
+          if not webhook:
+              raise SystemExit("DISCORD_WEBHOOK_FLAKE secret is missing")
+
+          GREEN, RED, BLUE, PURPLE, GREY, ORANGE = 0x2EA043, 0xDA3633, 0x1F6FEB, 0x8957E5, 0x6E7681, 0xD29922
+
+          def clip(s, n=1000):
+              s = (s or "").strip()
+              return s if len(s) <= n else s[: n - 1] + "…"
+
+          def embed(title, url, desc, color, fields=None, author=None):
+              e = {"title": clip(title, 250), "url": url, "description": clip(desc, 4000), "color": color,
+                   "footer": {"text": payload.get("repository", {}).get("full_name", "flake")}}
+              if fields:
+                  e["fields"] = [{"name": clip(f[0], 250), "value": clip(f[1], 1024), "inline": True} for f in fields]
+              if author:
+                  e["author"] = {"name": author}
+              return e
+
+          e = None
+
+          if event == "push":
+              branch = payload["ref"].replace("refs/heads/", "")
+              commits = payload.get("commits") or []
+              if payload.get("deleted"):
+                  e = embed(f"🗑 branch deleted — {branch}", None, "", GREY)
+              elif not commits:
+                  e = embed(f"↻ force-push to {branch}", payload.get("compare"), "", ORANGE,
+                            author=payload["pusher"]["name"])
+              else:
+                  lines = [f"`{c['id'][:7]}` {c['message'].splitlines()[0]} — {c['author']['name']}" for c in commits[:8]]
+                  if len(commits) > 8:
+                      lines.append(f"…and {len(commits) - 8} more")
+                  e = embed(f"push {len(commits)} commit{'s' if len(commits) != 1 else ''} to {branch}",
+                            payload.get("compare"), "\n".join(lines), GREEN,
+                            author=payload["pusher"]["name"])
+
+          elif event == "pull_request":
+              pr = payload["pull_request"]
+              action = payload["action"]
+              if action == "closed" and not pr.get("merged"):
+                  color, verb = GREY, "closed without merging"
+              elif action == "closed":
+                  color, verb = PURPLE, "merged"
+              else:
+                  color, verb = BLUE, action.replace("_", " ")
+              body = clip(pr.get("body") or "", 900) or "_(no description)_"
+              e = embed(f"PR #{pr['number']} {verb} — {pr['title']}", pr["html_url"], body, color,
+                        author=pr["user"]["login"],
+                        fields=[("branch", f"{pr['head']['ref']} → {pr['base']['ref']}"),
+                                ("commits / files", f"{pr.get('commits', '?')} / {pr.get('changed_files', '?')}")])
+
+          elif event == "issues":
+              i = payload["issue"]
+              body = clip(i.get("body") or "", 900) or "_(no description)_"
+              e = embed(f"issue #{i['number']} {payload['action']} — {i['title']}", i["html_url"], body, ORANGE,
+                        author=i["user"]["login"])
+
+          elif event == "release":
+              r = payload["release"]
+              e = embed(f"release {r['tag_name']} published", r["html_url"],
+                        clip(r.get("body") or "", 900) or "_(no notes)_", PURPLE, author=r["author"]["login"])
+
+          elif event == "workflow_run":
+              w = payload["workflow_run"]
+              if w["conclusion"] not in ("failure", "timed_out", "cancelled"):
+                  raise SystemExit(0)  # stay quiet on success — CI already shows on the PR
+              e = embed(f"❌ {w['name']} {w['conclusion']} on {w['head_branch']}", w["html_url"],
+                        f"commit `{w['head_sha'][:7]}` by {w['actor']['login'] if w.get('actor') else '?'}", RED,
+                        fields=[("event", w["event"])])
+
+          if e is None:
+              raise SystemExit(0)
+
+          req = urllib.request.Request(
+              webhook,
+              data=json.dumps({"embeds": [e], "allowed_mentions": {"parse": []}}).encode(),
+              headers={"Content-Type": "application/json", "User-Agent": "DiscordBot (flake-feed, 1.0)"},
+          )
+          with urllib.request.urlopen(req, timeout=20) as resp:
+              print("posted", resp.status)
+          PY
