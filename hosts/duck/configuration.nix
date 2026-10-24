@@ -82,8 +82,9 @@
     quickemu
   ];
 
-  programs.niri.enable = true;
   programs.umbriel.enable = true;
+
+  programs.nix-ld.enable = true;
 
   environment.variables.NIXOS_OZONE_WL = "1";
   environment.pathsToLink = [
@@ -238,7 +239,7 @@
     modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    open = true;
+    open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };

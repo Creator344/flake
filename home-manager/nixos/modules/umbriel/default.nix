@@ -7,7 +7,7 @@
     settings = {
       general = {
         autostart = [ "noctalia" ];
-        show_cheatsheet = true;
+        show_cheatsheet = false;
       };
       layout.gap = 5;
       input.keyboard.layout = "nz";

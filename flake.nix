@@ -32,7 +32,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
-    niri.url = "github:sodiboo/niri-flake";
     millennium.url = "github:SteamClientHomebrew/Millennium?dir=packages/nix";
     blender-bin = {
       url = "github:edolstra/nix-warez/?dir=blender";
@@ -44,6 +43,7 @@
       url = "github:zed-industries/zed";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hermes-agent.url = "github:NousResearch/hermes-agent";
   };
 
   outputs =

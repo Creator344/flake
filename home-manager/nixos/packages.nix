@@ -79,6 +79,8 @@
     blender_5_0
     # Development
     jetbrains.datagrip
+    # Emails
+    thunderbird
     # File Management
     krusader
     qdirstat

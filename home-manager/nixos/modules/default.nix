@@ -3,12 +3,13 @@
     ./alacritty
     ./atuin
     ./bash
-    ./floorp
     ./git
+    ./hermes
     ./java
-    ./niri
+    ./librewolf
     ./nixcord
     ./noctalia
+    ./obs
     ./spicetify
     ./starship
     ./stylix
