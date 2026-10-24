@@ -1,2 +1,5 @@
+# `repeated_keys` flags idiomatic NixOS config (`boot.x`, `services.y`, ...
+# re-opened throughout a module) rather than a real problem, so it stays off
+# deliberately — not because the duplication in this repo went unnoticed.
 disabled = ["repeated_keys"]
 ignore = [".git"]

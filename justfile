@@ -3,7 +3,8 @@ alias t := tidy
 alias u := update
 alias f := format
 
-hostname := `uname --nodename`
+# `uname -n`, not `--nodename`: BSD uname on macOS has no long options.
+hostname := `uname -n`
 
 rebuild:
     {{ if hostname == "duckbook-pro" { "darwin-rebuild switch --flake .#" + hostname } else { "nixos-rebuild switch --flake .#" + hostname + " --sudo" } }}
@@ -16,4 +17,4 @@ update:
     just r
 
 format:
-    treefmt
+    nix fmt

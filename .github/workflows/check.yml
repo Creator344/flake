@@ -19,7 +19,9 @@ jobs:
       matrix:
         include:
           - name: nixfmt
-            run: nix run nixpkgs#nixfmt-rfc-style -- --check ./**/*.nix
+            # globstar is off in bash, so ./**/*.nix silently matched only
+            # ./global-modules/*.nix — 2 of 33 files. git ls-files is exact.
+            run: nix run nixpkgs#nixfmt -- --check $(git ls-files '*.nix')
           - name: statix
             run: nix run nixpkgs#statix -- check .
           - name: deadnix

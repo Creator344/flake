@@ -23,6 +23,10 @@
 
     inputs.home-manager.darwinModules.home-manager
     {
+      # Without this, one hand-edited dotfile that HM also manages aborts
+      # activation with "existing file would be clobbered".
+      home-manager.backupFileExtension = "backup";
+
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
