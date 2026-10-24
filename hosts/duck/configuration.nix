@@ -12,6 +12,14 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # OBS virtual cam. Lives here rather than in hardware-configuration.nix so
+  # `nixos-generate-config` can't silently drop it.
+  boot.kernelModules = [ "v4l2loopback" ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=2 video_nr=1,2 card_label="OBS Cam, Virt Cam" exclusive_caps=1
+  '';
+
   nixpkgs.config.allowUnfree = true;
 
   fileSystems."/drives/2TB" = {
@@ -114,7 +122,8 @@
 
     containers = {
       arm = {
-        image = "automaticrippingmachine/automatic-ripping-machine:latest";
+        # Pinned: `latest` silently upgrades and rips have no rollback path.
+        image = "automaticrippingmachine/automatic-ripping-machine:2.24.4";
         ports = [ "127.0.0.1:8080:8080" ];
         environment = {
           ARM_UID = "1000";
@@ -122,18 +131,21 @@
           NVIDIA_DRIVER_CAPABILITIES = "all";
           TIMEZONE = "Pacific/Auckland";
         };
+        # Music/logs/config live under /home/arm already — no extra binds.
         volumes = [
           "/drives/2TB/arm:/home/arm"
-          "/drives/2TB/arm/Music:/home/arm/Music"
-          "/drives/2TB/arm/logs:/home/arm/logs"
           "/drives/2TB/media:/home/arm/media"
-          "/drives/2TB/arm/config:/etc/arm/config"
         ];
         devices = [
           "/dev/sr0:/dev/sr0"
           "nvidia.com/gpu=all"
         ];
-        privileged = true;
+        # Not privileged: devices above are enough, and privileged hands the
+        # container the whole host /dev. cdrom group is for the optical drive.
+        extraOptions = [
+          "--group-add"
+          "cdrom"
+        ];
         hostname = "arm";
         autoStart = true;
       };
@@ -146,6 +158,9 @@
     settings = {
       global = {
         security = "user";
+        # Without this, `guest ok = yes` under security = user just rejects
+        # anonymous clients instead of mapping them to guest.
+        "map to guest" = "bad user";
       };
       "movies" = {
         "path" = "/drives/2TB/media/completed/movies";
@@ -157,11 +172,6 @@
   };
 
   services.usbmuxd.enable = true;
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
 
   services.flatpak.enable = true;
   services.gnome.gnome-keyring.enable = true;
@@ -245,6 +255,10 @@
   };
 
   nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     extra-substituters = [
       "https://cache.nixos-cuda.org"
       "https://zed.cachix.org"

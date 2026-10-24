@@ -22,10 +22,15 @@ let
     (extension "don-t-fuck-with-paste" "DontFuckWithPaste@raim.ist")
     (extension "hide-youtube-shorts" "{88ebde3a-4581-4c6b-8019-2a05a9e3e938}")
   ];
-  mkProfile = { id, extra ? { } }: {
+  mkProfile =
+    {
+      id,
+      extra ? { },
+    }:
+    {
       inherit id;
       extensions.force = true;
-  
+
       settings = {
         "extensions.autoDisableScopes" = 0;
         "extensions.pocket.enabled" = false;
@@ -50,7 +55,8 @@ let
         "browser.download.useDownloadDir" = true;
         "services.sync.engine.addons" = false;
       };
-    } // extra;
+    }
+    // extra;
 in
 {
   programs.librewolf = {

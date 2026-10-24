@@ -13,11 +13,12 @@
       allowedUDPPorts = [
         38274
         40759
-        8080
       ];
     };
 
-    nameservers = [
+    # NetworkManager owns DNS; the generic networking.nameservers only feeds a
+    # low-priority resolvconf entry that NM's DHCP answer overrides.
+    networkmanager.insertNameservers = [
       "1.1.1.1"
       "1.0.0.1"
     ];

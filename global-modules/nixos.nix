@@ -9,7 +9,7 @@
         inputs.zed.overlays.default
         # Rewire tools that hardcode a Nix reference so they use Lix too
         # (official recommendation from https://lix.systems/add-to-config)
-        (final: prev: {
+        (_final: prev: {
           inherit (prev.lixPackageSets.lix_2_96)
             nixpkgs-review
             nix-eval-jobs
@@ -30,12 +30,25 @@
     inputs.home-manager.nixosModules.home-manager
     inputs.umbriel.nixosModules.default
     {
+      # Without this, one hand-edited dotfile that HM also manages aborts
+      # activation with "existing file would be clobbered".
+      home-manager.backupFileExtension = "backup";
+
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
         extraSpecialArgs = { inherit inputs; };
         users.noahj = import ../home-manager/nixos;
       };
+    }
+    {
+      # CUDA/OBS/blender closures fill the store fast; `just tidy` needed a human.
+      nix.gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 30d";
+      };
+      nix.optimise.automatic = true;
     }
   ];
 }
