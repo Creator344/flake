@@ -32,6 +32,10 @@
     # Custom sound
     "Mod+Shift+C" = "spawn:aplay /home/noahj/something.wav";
 
+    # AI workspace (named workspace rule in default.nix)
+    "Pause" = "workspace-switch:AI";
+    "Mod+Pause" = "window-move-to-workspace:AI";
+
     # Workspace navigation
     "Mod+WheelDown" = "workspace-next";
     "Mod+WheelUp" = "workspace-previous";
