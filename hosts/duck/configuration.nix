@@ -7,6 +7,7 @@
   imports = [
     ./hardware-configuration.nix
     ./networking.nix
+    ./agents.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
