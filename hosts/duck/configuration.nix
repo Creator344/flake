@@ -118,41 +118,6 @@
     enable = true;
   };
 
-  virtualisation.oci-containers = {
-    backend = "docker";
-
-    containers = {
-      arm = {
-        # Pinned: `latest` silently upgrades and rips have no rollback path.
-        image = "automaticrippingmachine/automatic-ripping-machine:2.24.4";
-        ports = [ "127.0.0.1:8080:8080" ];
-        environment = {
-          ARM_UID = "1000";
-          ARM_GID = "100";
-          NVIDIA_DRIVER_CAPABILITIES = "all";
-          TIMEZONE = "Pacific/Auckland";
-        };
-        # Music/logs/config live under /home/arm already — no extra binds.
-        volumes = [
-          "/drives/2TB/arm:/home/arm"
-          "/drives/2TB/media:/home/arm/media"
-        ];
-        devices = [
-          "/dev/sr0:/dev/sr0"
-          "nvidia.com/gpu=all"
-        ];
-        # Not privileged: devices above are enough, and privileged hands the
-        # container the whole host /dev. cdrom group is for the optical drive.
-        extraOptions = [
-          "--group-add"
-          "cdrom"
-        ];
-        hostname = "arm";
-        autoStart = true;
-      };
-    };
-  };
-
   services.samba = {
     enable = true;
     openFirewall = true;
