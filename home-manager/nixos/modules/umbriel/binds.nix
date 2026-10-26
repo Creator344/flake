@@ -32,9 +32,10 @@
     # Custom sound
     "Mod+Shift+C" = "spawn:aplay /home/noahj/something.wav";
 
-    # AI workspace (named workspace rule in default.nix)
-    "Pause" = "workspace-switch:AI";
-    "Mod+Pause" = "window-move-to-workspace:AI";
+    # AI scratchpad (named "ai" in default.nix) — off the workspace strip
+    "Pause" = "scratchpad-toggle:ai";
+    "Mod+Pause" = "window-move-to-scratchpad:ai";
+    "Mod+Ctrl+Pause" = "window-restore-from-scratchpad:ai";
 
     # Workspace navigation
     "Mod+WheelDown" = "workspace-next";

@@ -12,10 +12,12 @@
       layout.gap = 5;
       input.keyboard.layout = "nz";
 
-      # Persistent named workspace for AI/agent work. A name-based rule keeps it
-      # around while empty on dynamic outputs, and `workspace-switch:AI` resolves
-      # it by name (no quotes needed, "AI" is not all digits).
-      workspace = [ { name = "AI"; } ];
+      # AI/agent surfaces live on a named scratchpad, not a workspace: Umbriel
+      # has no hidden-workspace concept, so any workspace (persistent names
+      # included) sits in the scroll strip. A scratchpad is the separate
+      # surface — outside the workspace list, toggled rather than scrolled to.
+      # Defining a named scratchpad removes the implicit "default" one.
+      scratchpad = [ { name = "ai"; } ];
     };
   };
 }
