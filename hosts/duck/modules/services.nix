@@ -2,7 +2,16 @@
   # --- remote access -------------------------------------------------------
   services.openssh = {
     enable = true;
-    settings.X11Forwarding = true;
+    settings = {
+      # Wayland-only host with no X clients: forwarding is pure attack surface.
+      X11Forwarding = false;
+      # argo-logs exists only for `ssh ... cat /var/log/nixos-rebuild.log`;
+      # naming the two accounts keeps the door that precise.
+      AllowUsers = [
+        "noahj"
+        "argo-logs"
+      ];
+    };
   };
 
   # Game streaming (Moonlight client side).
@@ -13,7 +22,10 @@
       inherit (pkgs) cudaPackages;
     };
     autoStart = true;
-    capSysAdmin = true; # only needed for Wayland -- omit this when using with Xorg
+    # Required for screen capture on umbriel (Wayland); without it sunshine
+    # cannot read the compositor's output. This is the box's largest single
+    # privilege grant — keep it only while sunshine is in use.
+    capSysAdmin = true;
     openFirewall = true;
   };
 

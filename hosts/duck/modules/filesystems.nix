@@ -14,7 +14,10 @@ let
       "x-gvfs-show"
       "uid=noahj"
       "gid=users"
-      "umask=000"
+      # Owner-writable, world-readable: enough for the Samba share and for the
+      # agent's log account to see media without handing every local process
+      # write access to the library.
+      "umask=0022"
     ];
   };
 in

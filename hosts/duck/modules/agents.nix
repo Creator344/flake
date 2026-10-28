@@ -1,10 +1,10 @@
 # Read-only log access for the hermes agent on ai-vps (Argo).
 #
 # The agent needs to see *why* a rebuild failed, never to change anything on
-# this box. So: one system user, no sudo, no write access, journal read via the
-# systemd-journal group, and a single key pinned to `restrict` (no pty, no
-# agent/port/X11 forwarding, no user rc) so it can only run non-interactive
-# read commands.
+# this box. So: one system user, no sudo, no write access, read access to the
+# one rebuild log file (not the whole journal — nothing here needs it), and a
+# single key pinned to `restrict` (no pty, no agent/port/X11 forwarding, no
+# user rc) so it can only run non-interactive read commands.
 { pkgs, ... }:
 {
   users.groups.argo-logs = { };
@@ -13,7 +13,8 @@
     description = "Read-only log access for the hermes agent (Argo)";
     isSystemUser = true;
     group = "argo-logs";
-    extraGroups = [ "systemd-journal" ];
+    # Deliberately no "systemd-journal": the file grant below is the whole
+    # reason this account exists, and the journal holds far more than rebuilds.
     # sshd runs remote commands through the user's shell, so it must be a real
     # one; `restrict` in authorized_keys is what blocks interactive sessions.
     shell = pkgs.bashInteractive;
