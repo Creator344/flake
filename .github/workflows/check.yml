@@ -1,3 +1,6 @@
+# Lint + evaluate, no builds. Evaluation proves the flake's options resolve;
+# it cannot see build-time failures (a package patch that stops applying, a
+# broken source). Those need a real `nix build` on a machine with the store.
 name: Validate Nix Flake
 
 on:
@@ -7,6 +10,9 @@ on:
     paths:
       - "**.nix"
       - "**.lock"
+      - "**.sh"
+      - "statix.toml"
+      - "justfile"
       - ".github/workflows/check.yml"
   pull_request:
 
@@ -26,6 +32,9 @@ jobs:
             run: nix run nixpkgs#statix -- check .
           - name: deadnix
             run: nix run nixpkgs#deadnix -- --fail .
+          - name: shellcheck
+            # -r: nothing to check is a pass, not an xargs error.
+            run: git ls-files -z '*.sh' | xargs -0 -r nix run nixpkgs#shellcheck --
     name: ${{ matrix.name }}
     runs-on: ubuntu-latest
     steps:
