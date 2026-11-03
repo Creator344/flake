@@ -12,7 +12,9 @@
     modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
-    open = false;
+    # Open kernel modules (in-tree, so they survive kernel bumps without a
+    # source build). Needs Turing or newer; CUDA works on them.
+    open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
