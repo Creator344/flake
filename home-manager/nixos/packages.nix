@@ -31,7 +31,6 @@
     p7zip
     rustc
     sqlite
-    yaak
     # Files
     gawk
     gnupg

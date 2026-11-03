@@ -24,7 +24,6 @@
       prettierd
       python3
       rustup
-      yaak
       # Files
       tree
       unzip
